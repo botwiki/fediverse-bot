@@ -1,0 +1,11 @@
+<div class="container pb-5">
+  {{> header }}
+    <div class="card mt-3">
+      <!-- <img class="card-img-top" src="{{post.thumbnail_url}}" alt=""> -->
+      <div class="card-body">
+        <h5 class="card-title" title="{{post.date_formatted}}">{{post.date}}</h5>
+        <p class="card-text">{{post.content}}</p>
+      </div>
+    </div>
+    <p class="mt-4"><a class="btn btn-primary" href="https://{{project_name}}.glitch.me/">Main page</a></p>
+</div>

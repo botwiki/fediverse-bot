@@ -1,0 +1,39 @@
+{
+	"origin": ["#phrase#"],
+  "phrase": [
+    "#count_thing#",
+    "#count_thing#",
+    "#count_thing#",
+    "#count_thing#",
+    "#count_thing#.",
+    "#count_thing#.",
+    "#count_thing#, #count_thing#"
+  ],
+  "count_thing": [
+    "#small_count_thing#",
+    "#small_count_thing#",
+    "#small_count_thing#",
+    "#large_count_thing#" 
+  ],
+  "small_count_thing": [
+    "1 #thing#",
+    "2 #thing.s#",
+    "3 #thing.s#"
+  ],
+  "large_count_thing": [
+    "4 #thing.s#",
+    "5 #thing.s#",
+    "6 #thing.s#",
+    "7 #thing.s#"
+  ],
+  "thing": [
+    "candle",
+    "circle",
+    "cup",
+    "mark",
+    "ward",
+    "body",
+    "wand",
+    "seal"
+  ]
+}
