@@ -1,0 +1,23 @@
+{
+  "install": {
+    "include": [
+      "^package\\.json$"
+    ]
+  },
+  "restart": {
+    "exclude": [
+      "^src/",
+      "^public/",
+      "^dist/"
+    ],
+    "include": [
+      "^routes/",      
+      "^helpers/",      
+      "\\.js$",
+      "\\.handlebars$",
+      "\\.json$",
+      ".env"
+    ]
+  },
+  "throttle": 2000
+}

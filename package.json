@@ -1,0 +1,38 @@
+{
+  "name": "glitch-fediverse-bot",
+  "version": "0.0.1",
+  "description": "A self-hosted fediverse bot, powered by Glitch",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "sqlite3": "^4.0.0",
+    "express-handlebars": "^3.0.0",
+    "body-parser": "^1.18.3",
+    "tracery-grammar": "^2.7.3",
+    "activitystrea.ms": "^2.1.3",
+    "pem": "^1.13.0",
+    "momentjs": "^2.0.0",
+    "rss": "^1.2.2",
+    "pubsubhubbub": "^0.4.1",
+    "node-openssl-cert": "^0.0.47",
+    "generate-rsa-keypair": "^0.1.2",
+    "node-sass-middleware": "^0.11.0",
+    "express-babelify-middleware": "^0.2.1"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/glitch-fediverse-bot"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "fediverse",
+    "bot"
+  ]
+}

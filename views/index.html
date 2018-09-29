@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>glitch-fediverse-bot</title>
+    <meta name="description" content="Self-hosted fediverse bot, powered by Glitch">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://{{project_name}}.glitch.me/style.css">
+    <link rel="alternate" href="https://{{project_name}}.glitch.me/feed" type="application/atom+xml" title="Atom feed">
+    <script src="./client.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>
+        Self-hosted fediverse bot
+      </h1>
+    </header>
+    <main>
+      {{body}}
+    </main>
+    <footer>
+      Powered by <a href="https://glitch.com">Glitch</a>!
+    </footer>
+    <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
+    <script src="https://button.glitch.me/button.js"></script>
+  </body>
+</html>
