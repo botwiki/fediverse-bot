@@ -36,8 +36,8 @@ app.use('/js/scripts.js', babelify('src/scripts/scripts.js', {
 app.engine('handlebars', exphbs({
   defaultLayout: 'main',
   helpers: {
-    for: require('./handlebar-helpers/for'),
-    equals: require('./handlebar-helpers/equals')
+    for: require('./handlebars-helpers/for'),
+    equals: require('./handlebars-helpers/equals')
   }  
 }));
 
