@@ -1,5 +1,7 @@
 var path = require('path'),
     express = require('express'),
+    session = require('express-session'),
+    SQLiteStore = require('connect-sqlite3')(session),
     exphbs  = require('express-handlebars'),
     bodyParser = require('body-parser'),
     pubSubHubbub = require('pubsubhubbub'),
@@ -19,6 +21,14 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+app.use(session({
+  store: new SQLiteStore,
+  secret: process.env.ADMIN_PASSWORD,
+  resave: true,
+  saveUninitialized: true,  
+  cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 }
+}));
+
 app.use(sassMiddleware({
   // src: __dirname,
   src: __dirname + '/src/styles',
@@ -36,8 +46,8 @@ app.use('/js/scripts.js', babelify('src/scripts/scripts.js', {
 app.engine('handlebars', exphbs({
   defaultLayout: 'main',
   helpers: {
-    for: require('./handlebar-helpers/for'),
-    equals: require('./handlebar-helpers/equals')
+    for: require('./handlebars-helpers/for'),
+    equals: require('./handlebars-helpers/equals')
   }  
 }));
 
@@ -45,7 +55,9 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'handlebars');
 
 app.use('/', require('./routes/index.js'))
+app.use('/admin', require('./routes/admin.js'));
 app.use('/bot', require('./routes/bot.js'));
+app.use('/delete-post', require('./routes/delete-post.js'));
 app.use('/feed', require('./routes/feed.js'));
 app.use('/inbox', require('./routes/inbox.js'));
 app.use('/outbox', require('./routes/outbox.js'));

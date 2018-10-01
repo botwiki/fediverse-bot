@@ -6,6 +6,7 @@
 
 ## Bot logic (the back end)
 
+- Your bot's logic is inside the `routes/bot-endpoint.js` file. This is the code that runs when you access your bot's endpoint, as defined inside the `.env` file.
 - `TBD`
 
 ## The look of your bot's page (the front end)
@@ -23,6 +24,10 @@
 - ~~notify followers about new posts~~
 - ~~add post pagination~~
 - a way to delete posts (password-protected, with the password stored in `.env`)
+  - ~~create admin login interface~~
+  - ~~create endpoint for deleting posts~~
+  - send Delete message to Mastodon
+  - add confirmation before post gets deleted
 - upload images:
   - https://neocities.org/api, https://neocities.org/supporter, https://github.com/neocities/neocities-node
   - https://www.digitalocean.com/products/spaces/, https://glitch.com/~digitalocean-spaces-example

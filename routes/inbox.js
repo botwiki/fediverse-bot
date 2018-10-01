@@ -36,7 +36,12 @@ router.post('/', function (req, res) {
 
       res.status(200);
     });
-  }  
+  }
+  else if (payload.type === 'Delete'){
+    // console.log('payload', payload);  
+    console.log('Delete /*noop*/');  
+    res.status(200);
+  }
   else{
     console.log('payload', payload);  
     res.status(200);    
@@ -44,4 +49,3 @@ router.post('/', function (req, res) {
 });
 
 module.exports = router;
-

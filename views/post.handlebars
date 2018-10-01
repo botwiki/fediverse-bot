@@ -7,5 +7,10 @@
         <p class="card-text">{{post.content}}</p>
       </div>
     </div>
-    <p class="mt-4"><a class="btn btn-primary" href="https://{{project_name}}.glitch.me/">Main page</a></p>
+    <p class="mt-4">
+      <a class="btn btn-primary" href="https://{{project_name}}.glitch.me/">Main page</a>
+      {{#if is_admin}}
+      <a title="Delete this post" class="btn btn-secondary" href="/delete-post/{{this.id}}">Delete</a>
+      {{/if}}
+    </p>
 </div>

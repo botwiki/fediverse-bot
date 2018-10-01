@@ -14,6 +14,7 @@ router.get('/:id',  function(req, res) {
         bot_avatar_url: process.env.BOT_AVATAR_URL,
         bot_username: process.env.BOT_USERNAME,
         bot_description: process.env.BOT_DESCRIPTION,
+        is_admin: req.session.is_admin,
         page_title: post_data.date,
         page_description: post_data.content,
         post: post_data
@@ -24,11 +25,11 @@ router.get('/:id',  function(req, res) {
         project_name: process.env.PROJECT_DOMAIN,
         bot_avatar_url: process.env.BOT_AVATAR_URL,
         bot_username: process.env.BOT_USERNAME,
-        bot_description: process.env.BOT_DESCRIPTION
+        bot_description: process.env.BOT_DESCRIPTION,
+        is_admin: req.session.is_admin
       });      
     }  
   });
-
 });
 
 module.exports = router;
