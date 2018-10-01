@@ -37,14 +37,15 @@
 
 ## Resources:
 
-- https://blog.joinmastodon.org/2018/06/how-to-implement-a-basic-activitypub-server/
-- https://github.com/tootsuite/mastodon/issues/1441
-- https://github.com/dariusk/express-activitypub
+- [ActivityPub documentation](https://github.com/w3c/activitypub) (github.com)
+- [How to implement a basic ActivityPub server](https://blog.joinmastodon.org/2018/06/how-to-implement-a-basic-activitypub-server/) (blog.joinmastodon.org)
+- [What is necessary for Mastodon to be able to fetch my profile and a list of posts from my blog?](https://github.com/tootsuite/mastodon/issues/1441) (github.com)
+- [express-activitypub](https://github.com/dariusk/express-activitypub) (github.com)
 
-## Notes
+## Debugging/testing
 
-- https://glitch-fediverse-bot.glitch.me/.well-known/webfinger?resource=acct:bot@glitch-fediverse-bot.glitch.me
-- https://glitch-fediverse-bot.glitch.me/bot?debug=true
+- [webfinger output](https://glitch-fediverse-bot.glitch.me/.well-known/webfinger?resource=acct:bot@glitch-fediverse-bot.glitch.me)
+- [the Actor object](https://glitch-fediverse-bot.glitch.me/bot?debug=true)
 
 
 
