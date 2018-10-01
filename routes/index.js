@@ -1,4 +1,5 @@
 var express = require('express'),
+    session = require('express-session'),
     router = express.Router(),
     moment = require('moment'),
     db = require(__dirname + '/../helpers/db.js'),
@@ -15,7 +16,7 @@ router.get('/', function (req, res) {
   }
   else{
     var page = parseInt(req.query.page) || 1;
-    
+        
     db.get_posts({
       page: page
     }, function(err, data){
@@ -45,6 +46,7 @@ router.get('/', function (req, res) {
         bot_description: process.env.BOT_DESCRIPTION,
         page_title: process.env.BOT_USERNAME,
         page_description: process.env.BOT_DESCRIPTION,
+        is_admin: req.session.is_admin,
         post_count: data.post_count,
         page_count: data.page_count,
         posts: data.posts,

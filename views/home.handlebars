@@ -8,7 +8,12 @@
         <!-- <h5 class="card-title" title="{{this.date_formatted}}">{{this.date}}</h5> -->
         <p class="card-text">{{this.content}}</p>
       </div>
-      <div class="card-footer text-muted" title="{{this.date}}"><a href="/post/{{this.id}}">{{this.date_formatted}}</a></div>
+      <div class="card-footer text-muted">
+        <a href="/post/{{this.id}}" title="{{this.date}}">{{this.date_formatted}}</a>
+        {{#if ../is_admin}}
+        <a title="Delete this post" class="btn btn-sm btn-secondary float-right" href="/delete-post/{{this.id}}">Delete</a>
+        {{/if}}
+      </div>
     </div>
   {{/each}}
 

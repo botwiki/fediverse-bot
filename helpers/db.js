@@ -7,10 +7,17 @@ var fs = require('fs'),
 
 /*
 
+Posts table
+
 id       INT NOT NULL AUTO_INCREMENT
 date     DATETIME DEFAULT current_timestamp
 type     VARCHAR(255)
 content  TEXT
+
+Followers table
+
+url      TEXT PRIMARY KEY
+date     DATETIME DEFAULT current_timestamp
 
 */
 
@@ -37,44 +44,6 @@ module.exports = {
         }
       });
     });    
-  },
-  save_post: function(post_data, cb){
-    db.serialize(function() {
-      db.run(`INSERT INTO Posts (type, content) VALUES ("${post_data.type}", "${post_data.content}")`, function(err, data){
-        if (cb){
-          cb(err, this);
-        }
-      });
-    });
-  },
-  save_follower: function(payload, cb){
-    db.serialize(function() {
-      db.run(`INSERT INTO Followers (url) VALUES ("${payload.actor}")`, function(err, data){
-        if (cb){
-          cb(err, this);
-        }
-      });
-    });
-  },
-  remove_follower: function(payload, cb){
-    db.serialize(function() {
-      db.run(`DELETE FROM Followers WHERE url="${payload.actor}"`, function(err, data){
-        if (cb){
-          cb(err, this);
-        }
-      });
-    });
-  },  
-  get_followers: function(cb){
-    var data = [];
-    db.serialize(function(){
-      
-      db.all("SELECT * from Followers ORDER BY date DESC", function(err, rows) {
-        if (cb){
-          cb(null, rows);
-        }        
-      });
-    });
   },
   get_posts: function(options, cb){
     var data = [],
@@ -115,6 +84,53 @@ module.exports = {
         if (cb){
           var post_data = (rows ? rows[0] : null);
           cb(null, post_data);
+        }        
+      });
+    });
+  },  
+  save_post: function(post_data, cb){
+    db.serialize(function() {
+      db.run(`INSERT INTO Posts (type, content) VALUES ("${post_data.type}", "${post_data.content}")`, function(err, data){
+        if (cb){
+          cb(err, this);
+        }
+      });
+    });
+  },
+  delete_post: function(post_id, cb){
+    db.serialize(function() {
+      db.run(`DELETE FROM Posts WHERE id="${post_id}"`, function(err, data){
+        if (cb){
+          cb(err, this);
+        }
+      });
+    });
+  },    
+  save_follower: function(payload, cb){
+    db.serialize(function() {
+      db.run(`INSERT INTO Followers (url) VALUES ("${payload.actor}")`, function(err, data){
+        if (cb){
+          cb(err, this);
+        }
+      });
+    });
+  },
+  remove_follower: function(payload, cb){
+    db.serialize(function() {
+      db.run(`DELETE FROM Followers WHERE url="${payload.actor}"`, function(err, data){
+        if (cb){
+          cb(err, this);
+        }
+      });
+    });
+  },  
+  get_followers: function(cb){
+    var data = [];
+    db.serialize(function(){
+      
+      db.all("SELECT * from Followers ORDER BY date DESC", function(err, rows) {
+        if (cb){
+          cb(null, rows);
         }        
       });
     });
