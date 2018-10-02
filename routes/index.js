@@ -41,6 +41,7 @@ router.get('/', function (req, res) {
 
       res.render('../views/home.handlebars', {
         project_name: process.env.PROJECT_DOMAIN,
+        bot_url: `https://${process.env.PROJECT_DOMAIN}.glitch.me/`,        
         bot_avatar_url: process.env.BOT_AVATAR_URL,
         bot_username: process.env.BOT_USERNAME,
         bot_description: process.env.BOT_DESCRIPTION,

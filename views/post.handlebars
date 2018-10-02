@@ -1,16 +1,20 @@
 <div class="container pb-5">
   {{> header }}
     <div class="card mt-3">
-      <!-- <img class="card-img-top" src="{{post.thumbnail_url}}" alt=""> -->
-      <div class="card-body">
-        <h5 class="card-title" title="{{post.date_formatted}}">{{post.date}}</h5>
-        <p class="card-text">{{post.content}}</p>
-      </div>
+      {{#if post.thumbnail_url}}    
+        <img class="card-img-top" src="{{post.thumbnail_url}}" alt="">
+      {{/if}}  
+        <div class="card-body">
+          <h5 class="card-title" title="{{post.date_formatted}}">{{post.date}}</h5>
+          {{#if post.content}}
+            <p class="card-text">{{post.content}}</p>
+          {{/if}}        
+        </div>
     </div>
     <p class="mt-4">
-      <a class="btn btn-primary" href="https://{{project_name}}.glitch.me/">Main page</a>
+      <a class="btn btn-primary" href="{{bot_url}}">Main page</a>
       {{#if is_admin}}
-      <a title="Delete this post" class="btn btn-secondary" href="/delete-post/{{this.id}}">Delete</a>
+      <a data-confirm="Are you sure you want to delete this post?" title="Delete this post" class="btn btn-secondary" href="/delete-post/{{post.id}}">Delete</a>
       {{/if}}
     </p>
 </div>

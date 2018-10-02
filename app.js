@@ -59,6 +59,8 @@ app.use('/admin', require('./routes/admin.js'));
 app.use('/bot', require('./routes/bot.js'));
 app.use('/delete-post', require('./routes/delete-post.js'));
 app.use('/feed', require('./routes/feed.js'));
+app.use('/img', express.static(__dirname + '/.data/img/'));
+
 app.use('/inbox', require('./routes/inbox.js'));
 app.use('/outbox', require('./routes/outbox.js'));
 app.use('/post', require('./routes/post.js'));

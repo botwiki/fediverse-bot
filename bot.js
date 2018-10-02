@@ -6,7 +6,6 @@ var fs = require('fs'),
     db = require(__dirname + '/helpers/db.js'),
     keys = require(__dirname + '/helpers/keys.js'),
     request = require('request'),
-    crypto = require('crypto'),
     public_key_path = '.data/rsa/pubKey',
     private_key_path = '.data/rsa/privKey',
     bot_url = `https://${process.env.PROJECT_DOMAIN}.glitch.me`;
@@ -78,7 +77,7 @@ else{
     create_post: function(options, cb){
       var bot = this;
 
-      if (!options.content || options.content.trim().length === 0 ){
+      if ((!options.content || options.content.trim().length === 0 ) && (!options.thumbnail_url)){
         console.log('error: missing post content')
         return false;
       }
@@ -86,34 +85,87 @@ else{
       var type = options.type || 'Note',
           post_date = moment().format(),
           post_in_reply_to = options.in_reply_to || null,
-          post_content = options.content || '';
+          post_content = options.content || '',
+          post_thumbnail_url = options.thumbnail_url || '';
 
       db.save_post({
         type: type,
-        content: post_content
+        content: post_content,
+        thumbnail_url: post_thumbnail_url
       }, function(err, data){
         var post_id = data.lastID;
+
         var obj = {
           '@context': 'https://www.w3.org/ns/activitystreams',
           'id': `${bot_url}/post/${post_id}`,
           'type': 'Create',
           'actor': `${bot_url}/bot`,
-
           'object': {
             'id': `${bot_url}/post/${post_id}`,
             'type': type,
             'published': post_date,
             'attributedTo': `${bot_url}/bot`,
-            // 'inReplyTo': post_in_reply_to,
             'content': post_content,
             'to': 'https://www.w3.org/ns/activitystreams#Public'
           }
+        }          
+        
+        if (options.thumbnail_url){
+          obj.preview = {
+            'type': 'Link',
+            'href': options.thumbnail_url,
+            'mediaType': 'image/png'
+          };  
         }
+        
+        if (options.post_in_reply_to){
+          obj.object.inReplyTo = post_in_reply_to;  
+        }
+        
+        db.get_followers(function(err, followers){
+          if (followers){
+            console.log(`sending update to ${followers.length} follower(s)...`);
+
+            followers.forEach(function(follower){
+              if (follower.url){
+                bot.sign_and_send({
+                  follower: follower,
+                  message: obj
+                }, function(err, data){
+
+                });
+              }
+            });
+          }
+        });
+
         if (cb){
           cb(null, obj);
         }
       });
     },
+    delete_post: function(post_id, follower_url, cb){
+        var bot = this;
+            // guid = crypto.randomBytes(16).toString('hex');
+
+        bot.sign_and_send({
+          follower: {
+            url: follower_url
+          },
+          message: {
+            '@context': 'https://www.w3.org/ns/activitystreams',
+            // 'summary': `${bot} deleted a post`,
+            // 'id': `${bot.bot_url}/${guid}`,
+            'type': 'Delete',
+            'actor': `${bot.bot_url}/bot`,
+            'object': `${bot.bot_url}/post/${post_id}`
+          }
+        }, function(err, data){
+            if (cb){
+                cb(err, data);
+            }
+        });
+    },    
     accept: function(payload, cb){
         var bot = this,
             guid = crypto.randomBytes(16).toString('hex');

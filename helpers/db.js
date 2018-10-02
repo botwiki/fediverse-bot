@@ -9,15 +9,16 @@ var fs = require('fs'),
 
 Posts table
 
-id       INT NOT NULL AUTO_INCREMENT
-date     DATETIME DEFAULT current_timestamp
-type     VARCHAR(255)
-content  TEXT
+id             INT NOT NULL AUTO_INCREMENT
+date           DATETIME DEFAULT current_timestamp
+type           VARCHAR(255)
+content        TEXT
+thumbnail_url  TEXT
 
 Followers table
 
-url      TEXT PRIMARY KEY
-date     DATETIME DEFAULT current_timestamp
+url            TEXT PRIMARY KEY
+date           DATETIME DEFAULT current_timestamp
 
 */
 
@@ -27,7 +28,7 @@ module.exports = {
       /*
         TODO: Rewrite this with promises.
       */
-      db.run('CREATE TABLE IF NOT EXISTS Posts (id INTEGER PRIMARY KEY AUTOINCREMENT, date DATETIME DEFAULT current_timestamp, type VARCHAR(255), content TEXT)', function(err, data){
+      db.run('CREATE TABLE IF NOT EXISTS Posts (id INTEGER PRIMARY KEY AUTOINCREMENT, date DATETIME DEFAULT current_timestamp, type VARCHAR(255), content TEXT, thumbnail_url TEXT)', function(err, data){
         if (err){
           console.log(err);
         }
@@ -89,8 +90,13 @@ module.exports = {
     });
   },  
   save_post: function(post_data, cb){
+    var post_type = post_data.type || 'Note',
+        post_content = post_data.content || '',
+        post_thumbnail_url = post_data.thumbnail_url || '';
+
+    
     db.serialize(function() {
-      db.run(`INSERT INTO Posts (type, content) VALUES ("${post_data.type}", "${post_data.content}")`, function(err, data){
+      db.run(`INSERT INTO Posts (type, content, thumbnail_url) VALUES ("${post_type}", "${post_content}", "${post_thumbnail_url}")`, function(err, data){
         if (cb){
           cb(err, this);
         }

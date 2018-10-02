@@ -1,6 +1,7 @@
 var express = require('express'),
     router = express.Router(),
     moment = require('moment'),
+    bot = require(__dirname + '/../bot.js'),
     db = require(__dirname + '/../helpers/db.js');
 
 router.get('/:id',  function(req, res) {
@@ -17,6 +18,17 @@ router.get('/:id',  function(req, res) {
         console.log(`error deleting post ${post_id}`, err);
       } else {
         console.log(`deleted post ${post_id}`);
+
+        db.get_followers(function(err, followers){
+          console.log('followers:', followers);
+          followers.forEach(function(follower){
+            if (follower.url){
+              bot.delete_post(post_id, follower.url, function(err, data){
+
+              });
+            }
+          });
+        });
       }
     });
     res.redirect('/');

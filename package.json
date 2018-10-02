@@ -22,7 +22,10 @@
     "node-sass-middleware": "^0.11.0",
     "express-babelify-middleware": "^0.2.1",
     "express-session": "^1.15.6",
-    "connect-sqlite3": "^0.9.11"
+    "connect-sqlite3": "^0.9.11",
+    "canvas": "^2.0.0-alpha.17",
+    "color-scheme": "^1.0.1",
+    "gifencoder": "^1.1.0"
   },
   "engines": {
     "node": "8.x"
