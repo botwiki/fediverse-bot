@@ -1,4 +1,11 @@
-// 'use strict';
+(function($) {
+  'use strict';
 
-// var who = 'world';
-// alert(`hello ${who}`);
+  $('[data-confirm]').click(function(ev){
+    // ev.preventDefault();
+    var confirmActionText = $(this).data('confirm');
+
+    return confirm(confirmActionText);
+  });
+
+})(jQuery);

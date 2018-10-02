@@ -1,4 +1,7 @@
 var helpers = {
+  get_timestamp: function(){
+    return Math.round((new Date()).getTime() / 1000);
+  },
   random_from_array: function(arr) {
     return arr[Math.floor(Math.random()*arr.length)]; 
   },

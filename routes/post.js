@@ -11,11 +11,12 @@ router.get('/:id',  function(req, res) {
       
       res.render('../views/post.handlebars', {
         project_name: process.env.PROJECT_DOMAIN,
+        bot_url: `https://${process.env.PROJECT_DOMAIN}.glitch.me/`,        
         bot_avatar_url: process.env.BOT_AVATAR_URL,
         bot_username: process.env.BOT_USERNAME,
         bot_description: process.env.BOT_DESCRIPTION,
         is_admin: req.session.is_admin,
-        page_title: post_data.date,
+        page_title: `${process.env.BOT_USERNAME}: ${post_data.date}`,
         page_description: post_data.content,
         post: post_data
       });      
@@ -23,9 +24,11 @@ router.get('/:id',  function(req, res) {
     else{
       res.render('../views/404.handlebars', {
         project_name: process.env.PROJECT_DOMAIN,
+        bot_url: `https://${process.env.PROJECT_DOMAIN}.glitch.me/`,        
         bot_avatar_url: process.env.BOT_AVATAR_URL,
         bot_username: process.env.BOT_USERNAME,
         bot_description: process.env.BOT_DESCRIPTION,
+        page_title: `${process.env.BOT_USERNAME}: Page not found`,
         is_admin: req.session.is_admin
       });      
     }  

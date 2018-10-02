@@ -1,12 +1,15 @@
 dependencies:
   activitystrea.ms: 2.1.3
   body-parser: 1.18.3
+  canvas: 2.0.0-alpha.17
+  color-scheme: 1.0.1
   connect-sqlite3: 0.9.11
   express: 4.16.3
   express-babelify-middleware: 0.2.1
   express-handlebars: 3.0.0
   express-session: 1.15.6
   generate-rsa-keypair: 0.1.2
+  gifencoder: 1.1.0
   momentjs: 2.0.0
   node-openssl-cert: 0.0.47
   node-sass-middleware: 0.11.0
@@ -1120,6 +1123,16 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-MvxLn82vhF/N9+c7uXysImHwqwo=
+  /canvas/2.0.0-alpha.17:
+    dependencies:
+      nan: 2.11.1
+      node-pre-gyp: 0.11.0
+    dev: false
+    engines:
+      node: '>=6'
+    requiresBuild: true
+    resolution:
+      integrity: sha512-oilR0HJFjl1Q5DVLTrLAxMVMIwJatsAJmflGpKE+JhSZ3a4RJP6MV113LwZDuySQffyU0Jpn6LOnqfacsVGzig==
   /caseless/0.12.0:
     dev: false
     resolution:
@@ -1225,6 +1238,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-S8A3PBZLwykbTTaMgpzxqApZ3KA=
+  /color-scheme/1.0.1:
+    dev: false
+    resolution:
+      integrity: sha512-4x+ya6+z6g9DaTFSfVzTZc8TSjxHuDT40NB43N3XPUkQlF6uujhwH8aeMeq8HBgoQQog/vrYgJ16mt/eVTRXwQ==
   /combine-source-map/0.8.0:
     dependencies:
       convert-source-map: 1.1.3
@@ -2073,6 +2090,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-Xv+OPmhNVprkyysSgmBOi6YhSfo=
+  /gifencoder/1.1.0:
+    dev: false
+    resolution:
+      integrity: sha512-MVh++nximxsp8NaNRfS1+MmCviZ4wi7HhuvX8eHrfNn//1mqi8Eb03tKs6Z+lIIcSEySJ6PmS1VPZ+HdtEMlfg==
   /glob-base/0.3.0:
     dependencies:
       glob-parent: 2.0.0
@@ -3189,6 +3210,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-F4miItu2rGnV2ySkXOQoA8FKz/SR2Q2sWP0sbTxNxz/tuokeC8WxOhPMcwi0qIyGtVn/rrSeLbvVkznqCdwYnw==
+  /nan/2.11.1:
+    dev: false
+    resolution:
+      integrity: sha512-iji6k87OSXa0CcrLl9z+ZiYSuR2o+c0bGuNmXdrhTQTakxytAFsC56SArGYoiHlJlFoHSnvmhpceZJaXkVuOtA==
   /nan/2.9.2:
     dev: false
     resolution:
@@ -3275,6 +3300,22 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-d1xFs+C/IPS8Id0qPTZ4bUT8wWryfR/OzzAFxweG+uLN85oPzyo2Iw6bVlLQ/JOdgNonXLCoRyqDzDWq4iw72A==
+  /node-pre-gyp/0.11.0:
+    dependencies:
+      detect-libc: 1.0.3
+      mkdirp: 0.5.1
+      needle: 2.2.4
+      nopt: 4.0.1
+      npm-packlist: 1.1.11
+      npmlog: 4.1.2
+      rc: 1.2.8
+      rimraf: 2.6.2
+      semver: 5.5.1
+      tar: 4.4.6
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha512-TwWAOZb0j7e9eGaf9esRx3ZcLaE5tQ2lvYy1pb5IAaG1a2e2Kv5Lms1Y4hpj+ciXJRofIxxlt5haeQ/2ANeE0Q==
   /node-sass-middleware/0.11.0:
     dependencies:
       mkdirp: 0.5.1
@@ -5060,12 +5101,15 @@ shrinkwrapVersion: 3
 specifiers:
   activitystrea.ms: ^2.1.3
   body-parser: ^1.18.3
+  canvas: ^2.0.0-alpha.17
+  color-scheme: ^1.0.1
   connect-sqlite3: ^0.9.11
   express: ^4.16.3
   express-babelify-middleware: ^0.2.1
   express-handlebars: ^3.0.0
   express-session: ^1.15.6
   generate-rsa-keypair: ^0.1.2
+  gifencoder: ^1.1.0
   momentjs: ^2.0.0
   node-openssl-cert: ^0.0.47
   node-sass-middleware: ^0.11.0
