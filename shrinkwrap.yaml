@@ -11,6 +11,7 @@ dependencies:
   generate-rsa-keypair: 0.1.2
   gifencoder: 1.1.0
   momentjs: 2.0.0
+  neocities: 0.0.3
   node-openssl-cert: 0.0.47
   node-sass-middleware: 0.11.0
   pem: 1.13.0
@@ -3253,6 +3254,12 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha1-KzJxhOiZIQEXeyhWP7XnECrNDKk=
+  /neocities/0.0.3:
+    dependencies:
+      form-data: 2.3.2
+    dev: false
+    resolution:
+      integrity: sha1-uFXSRjC2Ec7zUUinedXH73EgDAs=
   /node-forge/0.6.49:
     dev: false
     resolution:
@@ -5111,6 +5118,7 @@ specifiers:
   generate-rsa-keypair: ^0.1.2
   gifencoder: ^1.1.0
   momentjs: ^2.0.0
+  neocities: ^0.0.3
   node-openssl-cert: ^0.0.47
   node-sass-middleware: ^0.11.0
   pem: ^1.13.0

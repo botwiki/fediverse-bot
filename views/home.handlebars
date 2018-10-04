@@ -3,15 +3,17 @@
   
   {{#each posts}}
     <div class="card mt-4">
-      {{#if this.thumbnail_url}}    
-        <img class="card-img-top" src="{{this.thumbnail_url}}" alt="">
-      {{/if}}  
-      {{#if this.content}}    
+      {{#if this.attachment}}
+        <a href="/post/{{this.id}}" title="{{this.date}}">
+          <img class="card-img-top" src="{{this.attachment.0.url}}" alt="">
+        </a>
+      {{/if}}
+      {{#equals this.type "Note"}}
         <div class="card-body">
           <!-- <h5 class="card-title" title="{{this.date_formatted}}">{{this.date}}</h5> -->
           <p class="card-text">{{this.content}}</p>
         </div>
-      {{/if}}        
+      {{/equals}}
       <div class="card-footer text-muted">
         <a href="/post/{{this.id}}" title="{{this.date}}">{{this.date_formatted}}</a>
         {{#if ../is_admin}}
