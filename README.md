@@ -1,3 +1,6 @@
+**Note**: This project is under active development and not available for remixing, but you can [import it from GitHub](https://glitch.com/#!/import/github/fourtonfish/glitch-fediverse-bot).
+
+
 ![Glitch Fediverse bot](https://cdn.glitch.com/a4825d5c-d1d6-4780-8464-8636780177ef%2Fglitch-fediverse-bot-small-1024px.png?1538225347895)
 
 
