@@ -1,15 +1,19 @@
 <div class="container pb-5">
   {{> header }}
     <div class="card mt-3">
-      {{#if post.thumbnail_url}}    
-        <img class="card-img-top" src="{{post.thumbnail_url}}" alt="">
-      {{/if}}  
+      {{#equals post.type "Note"}}
         <div class="card-body">
           <h5 class="card-title" title="{{post.date_formatted}}">{{post.date}}</h5>
           {{#if post.content}}
             <p class="card-text">{{post.content}}</p>
           {{/if}}        
+
+          {{#each post.attachment}}
+            <p><a href="{{this.url}}"><img src="{{this.url}}"></a></p>
+            <p>{{this.content}}</p>
+          {{/each}}        
         </div>
+      {{/equals}}     
     </div>
     <p class="mt-4">
       <a class="btn btn-primary" href="{{bot_url}}">Main page</a>

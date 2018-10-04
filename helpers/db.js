@@ -13,7 +13,7 @@ id             INT NOT NULL AUTO_INCREMENT
 date           DATETIME DEFAULT current_timestamp
 type           VARCHAR(255)
 content        TEXT
-thumbnail_url  TEXT
+attachment     TEXT [this is a stringified JSON, see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-attachment]
 
 Followers table
 
@@ -28,7 +28,7 @@ module.exports = {
       /*
         TODO: Rewrite this with promises.
       */
-      db.run('CREATE TABLE IF NOT EXISTS Posts (id INTEGER PRIMARY KEY AUTOINCREMENT, date DATETIME DEFAULT current_timestamp, type VARCHAR(255), content TEXT, thumbnail_url TEXT)', function(err, data){
+      db.run('CREATE TABLE IF NOT EXISTS Posts (id INTEGER PRIMARY KEY AUTOINCREMENT, date DATETIME DEFAULT current_timestamp, type VARCHAR(255), content TEXT, attachment TEXT)', function(err, data){
         if (err){
           console.log(err);
         }
@@ -92,11 +92,14 @@ module.exports = {
   save_post: function(post_data, cb){
     var post_type = post_data.type || 'Note',
         post_content = post_data.content || '',
-        post_thumbnail_url = post_data.thumbnail_url || '';
+        post_attachment = post_data.attachment.toString() || '[]';
 
-    
     db.serialize(function() {
-      db.run(`INSERT INTO Posts (type, content, thumbnail_url) VALUES ("${post_type}", "${post_content}", "${post_thumbnail_url}")`, function(err, data){
+      // db.run(`INSERT INTO Posts (type, content, attachment) VALUES ("${post_type}", "${post_content}", "${post_attachment}")`, function(err, data){
+      db.run(`INSERT INTO Posts (type, content, attachment) VALUES ('${post_type}', '${post_content}', '${post_attachment}')`, function(err, data){
+        if (err){
+          console.log(err);
+        }
         if (cb){
           cb(err, this);
         }

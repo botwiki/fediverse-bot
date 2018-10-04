@@ -1,5 +1,3 @@
-*WORK IN PROGRESS*
-
 ![Glitch Fediverse bot](https://cdn.glitch.com/a4825d5c-d1d6-4780-8464-8636780177ef%2Fglitch-fediverse-bot-small-1024px.png?1538225347895)
 
 
@@ -40,7 +38,7 @@ You can use [ES6](http://es6-features.org/#Constants), you script files will be 
   - https://neocities.org/api, https://neocities.org/supporter, https://github.com/neocities/neocities-node
   - https://www.digitalocean.com/products/spaces/, https://glitch.com/~digitalocean-spaces-example
   - Flickr API
-  - as a fallback, use the `.data/img` folder
+  - ~~as a fallback, use the `.data/img` folder~~
 - reply to messages
 - add link to `/admin`
 - delete multiple posts at once (on the `/admin` page)

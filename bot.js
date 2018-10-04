@@ -77,49 +77,61 @@ else{
     create_post: function(options, cb){
       var bot = this;
 
-      if ((!options.content || options.content.trim().length === 0 ) && (!options.thumbnail_url)){
-        console.log('error: missing post content')
+      if ((!options.content || options.content.trim().length === 0 ) && !options.attachment ){
+        console.log('error: no post content or attachments');
         return false;
       }
 
-      var type = options.type || 'Note',
+      var post_type = options.type || 'Note',
+          post_description = options.description,
           post_date = moment().format(),
           post_in_reply_to = options.in_reply_to || null,
-          post_content = options.content || '',
-          post_thumbnail_url = options.thumbnail_url || '';
+          post_content = options.content || options.url || '',
+          post_attachment = JSON.stringify(options.attachment) || '[]';
 
       db.save_post({
-        type: type,
+        type: post_type,
         content: post_content,
-        thumbnail_url: post_thumbnail_url
+        attachment: post_attachment
       }, function(err, data){
         var post_id = data.lastID;
-
-        var obj = {
-          '@context': 'https://www.w3.org/ns/activitystreams',
-          'id': `${bot_url}/post/${post_id}`,
-          'type': 'Create',
-          'actor': `${bot_url}/bot`,
-          'object': {
+        
+        var post_object;
+        
+        if ( post_type === 'Note' ){
+          post_object = {
             'id': `${bot_url}/post/${post_id}`,
-            'type': type,
+            'type': post_type,
             'published': post_date,
             'attributedTo': `${bot_url}/bot`,
             'content': post_content,
             'to': 'https://www.w3.org/ns/activitystreams#Public'
+          };
+          
+          if (options.attachment){
+            var attachments = [];
+
+            options.attachment.forEach(function(attachment){
+              attachments.push({
+                'type': 'Image',
+                'content': attachment.content,
+                'url': attachment.url
+              });
+            });
+            post_object.attachment = attachments;
           }
-        }          
-        
-        if (options.thumbnail_url){
-          obj.preview = {
-            'type': 'Link',
-            'href': options.thumbnail_url,
-            'mediaType': 'image/png'
-          };  
         }
         
+        var post = {
+          '@context': 'https://www.w3.org/ns/activitystreams',
+          'id': `${bot_url}/post/${post_id}`,
+          'type': 'Create',
+          'actor': `${bot_url}/bot`,
+          'object': post_object
+        }          
+        
         if (options.post_in_reply_to){
-          obj.object.inReplyTo = post_in_reply_to;  
+          post.object.inReplyTo = post_in_reply_to;  
         }
         
         db.get_followers(function(err, followers){
@@ -130,7 +142,7 @@ else{
               if (follower.url){
                 bot.sign_and_send({
                   follower: follower,
-                  message: obj
+                  message: post
                 }, function(err, data){
 
                 });
@@ -140,7 +152,7 @@ else{
         });
 
         if (cb){
-          cb(null, obj);
+          cb(null, post);
         }
       });
     },

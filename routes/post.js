@@ -8,6 +8,11 @@ router.get('/:id',  function(req, res) {
   db.get_post(post_id, function(err, post_data){
     if (post_data){
       post_data.date_formatted = moment(post_data.date).fromNow();;
+
+      try{
+        post_data.attachment = JSON.parse(post_data.attachment);
+      } catch(err){ /*noop*/ }
+
       
       res.render('../views/post.handlebars', {
         project_name: process.env.PROJECT_DOMAIN,

@@ -25,6 +25,9 @@ router.get('/', function (req, res) {
       if (data && data.posts && data.posts.length > 0){
         data.posts.forEach(function(post){
           post.date_formatted = moment(post.date).fromNow();
+          try{
+            post.attachment = JSON.parse(post.attachment);
+          } catch(err){ /*noop*/ }
         });
       }
       
@@ -38,7 +41,7 @@ router.get('/', function (req, res) {
       if (page > 1 && page <= data.page_count){
         show_previous_page = true;
       }
-
+      
       res.render('../views/home.handlebars', {
         project_name: process.env.PROJECT_DOMAIN,
         bot_url: `https://${process.env.PROJECT_DOMAIN}.glitch.me/`,        
