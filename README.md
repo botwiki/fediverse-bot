@@ -35,7 +35,7 @@ You can use [ES6](http://es6-features.org/#Constants), you script files will be 
   - ~~send Delete message to Mastodon~~
   - ~~add confirmation before post gets deleted~~
 - upload images:
-  - https://neocities.org/api, https://neocities.org/supporter, https://github.com/neocities/neocities-node
+  - ~~https://neocities.org/api, https://neocities.org/supporter, https://github.com/neocities/neocities-node~~
   - https://www.digitalocean.com/products/spaces/, https://glitch.com/~digitalocean-spaces-example
   - Flickr API
   - ~~as a fallback, use the `.data/img` folder~~
