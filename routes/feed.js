@@ -8,6 +8,8 @@ var express = require('express'),
 router.get('/',  function(req, res) {
   console.log('rendering feed...');
     db.get_posts(function(err, posts){
+      console.log(err, posts);
+      
       var xml = `
 <?xml version="1.0"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:poco="http://portablecontacts.net/spec/1.0" xmlns:media="http://purl.org/syndication/atommedia" xmlns:ostatus="http://ostatus.org/schema/1.0" xmlns:mastodon="http://mastodon.social/schema/1.0">
