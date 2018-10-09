@@ -3,7 +3,7 @@ var express = require('express'),
     router = express.Router(),
     moment = require('moment'),
     db = require(__dirname + '/../helpers/db.js'),
-    bot = require(__dirname + '/../bot.js');
+    bot = require(__dirname + '/../bot/bot.js');
 
 router.get('/', function (req, res) {
   // console.log(req.headers);
@@ -22,6 +22,8 @@ router.get('/', function (req, res) {
     }, function(err, data){
       // console.log(posts);
       
+      var no_posts = false;
+      
       if (data && data.posts && data.posts.length > 0){
         data.posts.forEach(function(post){
           post.date_formatted = moment(post.date).fromNow();
@@ -29,6 +31,8 @@ router.get('/', function (req, res) {
             post.attachment = JSON.parse(post.attachment);
           } catch(err){ /*noop*/ }
         });
+      } else {
+        no_posts = true;
       }
       
       var show_next_page = false,
@@ -42,6 +46,8 @@ router.get('/', function (req, res) {
         show_previous_page = true;
       }
       
+      console.log(data.page_count, data.page_count > 1)
+      
       res.render('../views/home.handlebars', {
         project_name: process.env.PROJECT_DOMAIN,
         bot_url: `https://${process.env.PROJECT_DOMAIN}.glitch.me/`,        
@@ -54,6 +60,7 @@ router.get('/', function (req, res) {
         post_count: data.post_count,
         page_count: data.page_count,
         posts: data.posts,
+        no_posts: no_posts,
         current_page: page,
         show_pagination: data.page_count > 1,
         next_page: page + 1,

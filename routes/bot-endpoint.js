@@ -1,7 +1,7 @@
 var express = require('express'),
     router = express.Router(),
     grammar = require(__dirname + '/../tracery/tracery.js').grammar,
-    bot = require(__dirname + '/../bot.js');
+    bot = require(__dirname + '/../bot/bot.js');
 
 router.get('/', function (req, res) {
   var content = grammar.flatten("#origin#");

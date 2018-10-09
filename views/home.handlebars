@@ -1,6 +1,11 @@
 <div class="container pb-5">
   {{> header }}
   
+  {{#if no_posts}}
+  <p>This bot hasn't posted yet.</p>
+  {{/if}}
+  
+  
   {{#each posts}}
     <div class="card mt-4">
       {{#if this.attachment}}
@@ -11,13 +16,13 @@
       {{#equals this.type "Note"}}
         <div class="card-body">
           <!-- <h5 class="card-title" title="{{this.date_formatted}}">{{this.date}}</h5> -->
-          <p class="card-text">{{this.content}}</p>
+          <p class="card-text">{{{this.content}}}</p>
         </div>
       {{/equals}}
       <div class="card-footer text-muted">
-        <a href="/post/{{this.id}}" title="{{this.date}}">{{this.date_formatted}}</a>
+        <a href="/post/{{this.id}}" title="{{this.date}}" class="post-date">{{this.date_formatted}}</a>
         {{#if ../is_admin}}
-        <a data-confirm="Are you sure you want to delete this post?" title="Delete this post" class="btn btn-sm btn-secondary float-right" href="/delete-post/{{this.id}}">Delete</a>
+        <a data-confirm="Are you sure you want to delete this post?" title="Delete this post" class="btn btn-sm btn-danger float-right" href="/delete-post/{{this.id}}">Delete</a>
         {{/if}}
       </div>
     </div>
