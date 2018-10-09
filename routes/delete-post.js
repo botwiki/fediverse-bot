@@ -1,7 +1,7 @@
 var express = require('express'),
     router = express.Router(),
     moment = require('moment'),
-    bot = require(__dirname + '/../bot.js'),
+    bot = require(__dirname + '/../bot/bot.js'),
     db = require(__dirname + '/../helpers/db.js');
 
 router.get('/:id',  function(req, res) {

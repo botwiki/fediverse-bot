@@ -26,7 +26,8 @@
     "canvas": "^2.0.0-alpha.17",
     "color-scheme": "^1.0.1",
     "gifencoder": "^1.1.0",
-    "neocities": "^0.0.3"
+    "neocities": "^0.0.3",
+    "jsdom": "^12.1.0"
   },
   "engines": {
     "node": "8.x"

@@ -3,7 +3,7 @@ var express = require('express'),
     router = express.Router(),
     moment = require('moment'),
     db = require(__dirname + '/../helpers/db.js'),
-    bot = require(__dirname + '/../bot.js');
+    bot = require(__dirname + '/../bot/bot.js');
 
 
 
