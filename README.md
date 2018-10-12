@@ -1,4 +1,4 @@
-**Note**: This project is under active development and not available for remixing, but you can [import it from GitHub](https://glitch.com/#!/import/github/fourtonfish/glitch-fediverse-bot).
+**Note**: This project is under active development and not available for remixing on Glitch. Instead, please [import it from this GitHub repo](https://glitch.com/#!/import/github/fourtonfish/glitch-fediverse-bot).
 
 
 ![Glitch Fediverse bot](https://cdn.glitch.com/a4825d5c-d1d6-4780-8464-8636780177ef%2Fglitch-fediverse-bot.png)
@@ -26,26 +26,7 @@ You can use [ES6](http://es6-features.org/#Constants), you script files will be 
 
 ## TO-DO:
 
-- ~~profile customization via .env~~
-- ~~account discovery via webfinger~~
-- ~~follow the bot~~
-- ~~unfollow the bot~~
-- ~~notify followers about new posts~~
-- ~~add post pagination~~
-- ~~a way to delete posts (password-protected, with the password stored in `.env`)~~
-  - ~~create admin login interface~~
-  - ~~create endpoint for deleting posts~~
-  - ~~send Delete message to Mastodon~~
-  - ~~add confirmation before post gets deleted~~
-- upload images:
-  - ~~https://neocities.org/api, https://neocities.org/supporter, https://github.com/neocities/neocities-node~~
-  - https://www.digitalocean.com/products/spaces/, https://glitch.com/~digitalocean-spaces-example
-  - Flickr API
-  - ~~as a fallback, use the `.data/img` folder~~
-- reply to messages
-- add link to `/admin`
-- delete multiple posts at once (on the `/admin` page)
-- verify the payload
+[See issues on GitHub.](https://github.com/fourtonfish/glitch-fediverse-bot/issues)
 
 ## Resources:
 
