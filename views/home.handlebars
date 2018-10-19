@@ -1,11 +1,8 @@
 <div class="container pb-5">
   {{> header }}
-  
   {{#if no_posts}}
   <p>This bot hasn't posted yet.</p>
   {{/if}}
-  
-  
   {{#each posts}}
     <div class="card mt-4">
       {{#if this.attachment}}
@@ -27,37 +24,39 @@
       </div>
     </div>
   {{/each}}
-
-  {{#if show_pagination}}
-
-    <div class="mt-5">
-      <ul class="pagination">
-
-        {{#if show_previous_page}}
-            <li class="page-item">
-              <a class="page-link" href="/?page={{previous_page}}">Previous</a>
-            </li>
-        {{/if}}  
-
-        {{#for 1 page_count 1}}
-        <li class="page-item
-            {{#equals ../current_page this}}
-                active
-            {{/equals}}
-        ">
-          <a class="page-link" href="/?page={{this}}">{{this}}</a>
-        </li>
-
-        {{/for}}
-
-        {{#if show_next_page}}
-            <li class="page-item">
-              <a class="page-link" href="/?page={{next_page}}">Next</a>
-            </li>
-        {{/if}}        
-
-      </ul>
+  <div class="row mt-5">
+    <div class="col-sm-12 col-md-8">
+    {{#if show_pagination}}
+      <div>
+        <ul class="pagination flex-wrap">
+          {{#if show_previous_page}}
+              <li class="page-item">
+                <a class="page-link" href="/?page={{previous_page}}">Previous</a>
+              </li>
+          {{/if}}
+          {{#for 1 page_count 1}}
+          <li class="page-item
+              {{#equals ../current_page this}}
+                  active
+              {{/equals}}
+          ">
+            <a class="page-link" href="/?page={{this}}">{{this}}</a>
+          </li>
+          {{/for}}
+          {{#if show_next_page}}
+              <li class="page-item">
+                <a class="page-link" href="/?page={{next_page}}">Next</a>
+              </li>
+          {{/if}}
+        </ul>
+      </div>
+    {{/if}}
     </div>
-  {{/if}}
-
+    <div class="col-sm-12 col-md-4 text-right">
+      <a href="/about">What is this?</a>
+      {{#if show_admin_link}}
+        <a href="/admin">Admin</a>
+      {{/if}}
+    </div>
+  </div>
 </div>
