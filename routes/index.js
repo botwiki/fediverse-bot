@@ -46,8 +46,6 @@ router.get('/', function (req, res) {
         show_previous_page = true;
       }
       
-      console.log(data.page_count, data.page_count > 1)
-      
       res.render('../views/home.handlebars', {
         project_name: process.env.PROJECT_DOMAIN,
         bot_url: `https://${process.env.PROJECT_DOMAIN}.glitch.me/`,        
@@ -66,11 +64,24 @@ router.get('/', function (req, res) {
         next_page: page + 1,
         previous_page: page - 1,
         show_next_page: show_next_page,
-        show_previous_page: show_previous_page
+        show_previous_page: show_previous_page,
+        show_admin_link: process.env.SHOW_ADMIN_LINK && 
+        (process.env.SHOW_ADMIN_LINK === 'true' || process.env.SHOW_ADMIN_LINK === 'yes' ? true : false)
       });
-      
     });
   }
+});
+
+router.get('/about', function (req, res) {
+  res.render('../views/about.handlebars', {
+    project_name: process.env.PROJECT_DOMAIN,
+    bot_url: `https://${process.env.PROJECT_DOMAIN}.glitch.me/`,        
+    bot_avatar_url: process.env.BOT_AVATAR_URL,
+    bot_username: process.env.BOT_USERNAME,
+    bot_description: process.env.BOT_DESCRIPTION,
+    page_title: process.env.BOT_USERNAME,
+    page_description: process.env.BOT_DESCRIPTION
+  });
 });
 
 module.exports = router;
