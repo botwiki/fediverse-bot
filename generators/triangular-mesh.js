@@ -45,7 +45,7 @@ module.exports = function(options, cb) {
   var line, dot,
       odd = false, 
       lines = [],
-      gap = width / helpers.get_random_int(5,12);
+      gap = width / helpers.getRandomInt(5,12);
 
   for (var y = -2 * gap / 2; y <= 2 * height; y+= gap) {
     odd = !odd
@@ -66,7 +66,7 @@ module.exports = function(options, cb) {
     ctx.lineTo(pointC.x, pointC.y);
     ctx.lineTo(pointA.x, pointA.y);
     ctx.closePath();
-    ctx.fillStyle = '#' + helpers.random_from_array(options.colors); 
+    ctx.fillStyle = '#' + helpers.randomFromArray(options.colors); 
     ctx.fill();
     ctx.stroke();
   }
@@ -104,7 +104,7 @@ module.exports = function(options, cb) {
     });     
   }
   else{
-    var file_path = `${img_path}/${helpers.get_timestamp()}-${crypto.randomBytes(4).toString('hex')}`,
+    var file_path = `${img_path}/${helpers.getTimestamp()}-${crypto.randomBytes(4).toString('hex')}`,
         file_path_png = `${file_path}.png`,
         out = fs.createWriteStream(file_path_png),
         stream = canvas.createPNGStream();

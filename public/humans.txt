@@ -7,6 +7,8 @@
                                                       
 /*
 
+glitch.com/edit/#!/glitch-fediverse-bot
+
 Created by twitter.com/fourtonfish.
 
 humanstxt.org

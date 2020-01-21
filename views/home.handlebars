@@ -1,8 +1,8 @@
 <div class="container pb-5">
   {{> header }}
   {{#if no_posts}}
-  <p>This bot hasn't posted yet.</p>
-  {{/if}}
+  <p class="text-muted">This bot hasn't posted yet.</p>
+  {{/if}}  
   {{#each posts}}
     <div class="card mt-4">
       {{#if this.attachment}}
@@ -16,14 +16,24 @@
           <p class="card-text">{{{this.content}}}</p>
         </div>
       {{/equals}}
-      <div class="card-footer text-muted">
+      <div class="card-footer">
         <a href="/post/{{this.id}}" title="{{this.date}}" class="post-date">{{this.date_formatted}}</a>
         {{#if ../is_admin}}
-        <a data-confirm="Are you sure you want to delete this post?" title="Delete this post" class="btn btn-sm btn-danger float-right" href="/delete-post/{{this.id}}">Delete</a>
+        <a data-confirm="Are you sure you want to delete this post?" title="Delete this post" class="btn btn-secondary btn-sm float-right" href="/delete-post/{{this.id}}">Delete</a>
         {{/if}}
       </div>
     </div>
   {{/each}}
+  {{#if has_posts}}
+
+    {{#if is_admin}}
+    <div class="row mt-5">
+      <div class="col-sm-12 col-md-8">
+        <a data-confirm="Are you sure you want to delete all posts?" title="Delete all posts" class="btn" href="/delete-post/all">Delete all posts</a>
+      </div>
+    </div>
+    {{/if}}  
+  {{/if}}  
   <div class="row mt-5">
     <div class="col-sm-12 col-md-8">
     {{#if show_pagination}}
@@ -54,8 +64,12 @@
     </div>
     <div class="col-sm-12 col-md-4 text-right">
       <a href="/about">What is this?</a>
-      {{#if show_admin_link}}
-        <a href="/admin">Admin</a>
+      {{#if is_admin}}
+        <a href="/admin/logout">Log out</a>
+      {{else}}
+        {{#if show_admin_link}}
+          <a href="/admin">Admin</a>
+        {{/if}}
       {{/if}}
     </div>
   </div>

@@ -6,8 +6,8 @@ var express = require('express'),
     },    
     grammar = require(__dirname + '/../tracery/tracery.js').grammar,
     helpers = require(__dirname + '/../helpers/general.js'),    
-    image_uploader = require(__dirname + '/../helpers/image-uploader.js'),    
-    bot = require(__dirname + '/../bot.js');
+    imageUploader = require(__dirname + '/../helpers/image-uploader.js'),    
+    bot = require(__dirname + '/../bot/bot.js');
 
 router.get('/', function (req, res) {
   var content = grammar.flatten("#origin#"),
@@ -17,7 +17,7 @@ router.get('/', function (req, res) {
   See https://www.npmjs.com/package/color-scheme#schemes on how to use ColorScheme.
 */
 
-  scheme.from_hex(helpers.get_random_hex().replace('#',''))
+  scheme.from_hex(helpers.getRandomHex().replace('#',''))
         .scheme('mono')
         .variation('hard');
 
@@ -30,13 +30,13 @@ router.get('/', function (req, res) {
     
     var img_name = img_data.path.replace('img/', '');
         
-    image_uploader.upload_image(img_data, function(err, img_url, data){
+    imageUploader.uploadImage(img_data, function(err, img_url, data){
       if (err){
         console.log(err);
       } else {
         // console.log(img_url);
 
-        bot.create_post({
+        bot.createPost({
           type: 'Note',    
           content: content,
           attachment: [

@@ -1,14 +1,15 @@
-**Note**: This project is under active development and not available for remixing on Glitch. Instead, please [import it from this GitHub repo](https://glitch.com/#!/import/github/fourtonfish/glitch-fediverse-bot).
+***Note: This project is under active development and not available for remixing on Glitch. Instead, please [import it from this GitHub repo](https://glitch.com/#!/import/github/botwiki/glitch-fediverse-bot).***
 
 
-![Glitch Fediverse bot](https://cdn.glitch.com/a4825d5c-d1d6-4780-8464-8636780177ef%2Fglitch-fediverse-bot.png)
+![Glitch Fediverse bot feed](https://cdn.glitch.com/a4825d5c-d1d6-4780-8464-8636780177ef%2Ffeed-comb.png)
 
 
 # Glitch Fediverse bot
 
-With this Glitch starter project, you can create a bot that anyone [in the fediverse](https://en.wikipedia.org/wiki/Fediverse) can follow. This project is still in early development with more features coming.
+With this Glitch starter project, you can create a bot that anyone [in the fediverse](https://en.wikipedia.org/wiki/Fediverse) can follow. This project is [in early development](https://github.com/botwiki/glitch-fediverse-bot/issues) with more features coming.
 
 To automate your bot, set up a free service like [cron-job.org](https://cron-job.org/en/), [Uptime Robot](https://uptimerobot.com/), or [a similar one](https://www.google.com/search?q=free+web+cron) to wake up your bot [every 25+ minutes](https://support.glitch.com/t/a-simple-twitter-bot-template/747/16). Use `https://YOUR_PROJECT_NAME.glitch.me/BOT_ENDPOINT` as a URL to which to send the HTTP request. (`BOT_ENDPOINT` is set in your `.env` file.)
+
 
 ## Bot administration
 

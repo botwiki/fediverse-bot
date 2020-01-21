@@ -6,7 +6,7 @@ var fs = require('fs'),
     privkey_path = '.data/rsa/privKey';
 
 module.exports = {
-  generate_keys: function(cb) {
+  generateKeys: function(cb) {
     console.log('generating keys...');
     
     try{

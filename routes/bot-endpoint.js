@@ -6,7 +6,7 @@ var express = require('express'),
 router.get('/', function (req, res) {
   var content = grammar.flatten("#origin#");
   
-  bot.create_post({
+  bot.createPost({
     type: 'Note', // See www.w3.org/ns/activitystreams#objects
     content: content
   }, function(err, message){
