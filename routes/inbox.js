@@ -3,7 +3,7 @@ var fs = require('fs'),
     crypto = require('crypto'),
     util = require('util'),
     jsdom = require('jsdom'),
-    db = require(__dirname + '/../helpers/db.js'),
+    dbHelper = require(__dirname + '/../helpers/db.js'),
     bot = require(__dirname + '/../bot/bot.js');
 
 const { JSDOM } = jsdom;
@@ -27,7 +27,7 @@ router.post('/', function (req, res) {
     
     bot.accept(payload, function(err, payload, data){
       if (!err){
-        db.save_follower(payload, function(err, data){
+        dbHelper.saveFollower(payload, function(err, data){
           console.log(`new follower ${payload.actor} saved`); 
         });        
       }
@@ -37,7 +37,7 @@ router.post('/', function (req, res) {
   else if (payload.type === 'Undo'){
     bot.accept(payload, function(err, payload, data){
       if (!err){
-        db.remove_follower(payload, function(err, data){
+        dbHelper.removeFollower(payload, function(err, data){
           console.log(`removed follower ${payload.actor}`); 
         });
       }
@@ -54,7 +54,7 @@ router.post('/', function (req, res) {
 
         } catch(err){ /* noop */}
 
-        bot.compose_reply({
+        bot.composeReply({
           payload: payload,
           message_from: payload.actor,
           message_body: message_body,
@@ -62,7 +62,7 @@ router.post('/', function (req, res) {
           if (!err){
             console.log(err);
             console.log('sending reply...');
-            bot.send_reply({
+            bot.sendReply({
               payload: payload,
               message_body: message_body,
               reply_message: reply_message

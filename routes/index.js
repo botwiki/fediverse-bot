@@ -17,7 +17,7 @@ router.get('/', function (req, res) {
   else{
     var page = parseInt(req.query.page) || 1;
         
-    db.get_posts({
+    db.getPosts({
       page: page
     }, function(err, data){
       // console.log(posts);
@@ -58,6 +58,7 @@ router.get('/', function (req, res) {
         post_count: data.post_count,
         page_count: data.page_count,
         posts: data.posts,
+        has_posts: !no_posts,
         no_posts: no_posts,
         current_page: page,
         show_pagination: data.page_count > 1,

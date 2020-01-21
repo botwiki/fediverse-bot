@@ -1,5 +1,5 @@
 body{
-  background: #eff0f2;
+  background: #fef6e4;
 }
 
 main{
@@ -13,8 +13,8 @@ img{
 
 blockquote{
   /* Courtesy of css-tricks.com. */
-  background: #f9f9f9;
-  border-left: 10px solid #ccc;
+  background: $main;
+  border-left: 10px solid $tertiary;
   // max-width: $max-content-width;
   margin: 2em auto;
   padding: 0.5em 1em 1em 0;
@@ -25,7 +25,7 @@ blockquote{
   }
 
   &:before {
-    color: #ccc;
+    color: $tertiary;
     content: '“';
     font-size: 4em;
     line-height: 0.1em;
@@ -33,19 +33,13 @@ blockquote{
     vertical-align: -0.4em;
   }
 
-  p {
+  p, cite {
     line-height: 1.5em;
     padding: 0 40px;
   }
-}
-
-.card-footer{
-  a.post-date{
-    color: #6c757d;
+  
+  cite{
+    color: $paragraph + #222;
   }
 }
 
-#about-bot.jumbotron{
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}

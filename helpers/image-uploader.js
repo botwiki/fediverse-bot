@@ -1,5 +1,5 @@
 var fs = require('fs'),
-    bot = require(__dirname + '/../bot.js'),
+    bot = require(__dirname + '/../bot/bot.js'),
     NeoCities = require('neocities'),
     use_neocities = false;
 
@@ -10,7 +10,7 @@ if (process.env.NEOCITIES_USERNAME && process.env.NEOCITIES_PASSWORD){
 }
 
 module.exports = {
-  upload_image: function(img_data, cb){
+  uploadImage: function(img_data, cb){
     var img_url = `${bot.bot_url}/${img_data.path}`,
         img_name = img_data.path.replace('img/', '');
       
@@ -55,4 +55,5 @@ module.exports = {
     }
   }
 };
+
 

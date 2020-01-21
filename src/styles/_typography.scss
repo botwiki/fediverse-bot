@@ -1,1 +1,69 @@
 @import "variables";
+
+body{
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6{
+  font-family: 'Source Serif Pro', serif;
+  font-weight: bold;
+}
+
+
+#about-bot.jumbotron{
+  background: $tertiary;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  color: $highlight;
+  a{
+    color: $highlight;
+    text-decoration: underline;
+  }
+  .bot-username{
+    font-size: 1rem;
+    color: $highlight;
+  }
+}
+
+.card{
+  color: $paragraph;
+  border: solid 3px $stroke;
+
+  .card-footer{
+      background: #f3d2c1;
+
+      a.post-date{
+        color: $paragraph;
+      }
+  }
+}
+
+a, a:hover{
+  font-weight: bold;
+  color: $paragraph;
+}
+
+.card-text{
+  a{
+    text-decoration: underline;
+  }
+}
+
+.btn{
+  background: $tertiary;
+  transition: none;
+  
+  &:hover{
+    transition: none;
+  }
+}
+
+.btn-secondary{
+  color: $button-text;
+  border: 1px solid $button-text;
+  background: $highlight;
+}
+
+.text-muted{
+  color: $paragraph + #222;
+}

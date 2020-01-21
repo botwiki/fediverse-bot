@@ -4,19 +4,19 @@ var app = require(__dirname + '/app.js'),
 
 db.init();
 
-// db.drop_table('Posts');
-// db.drop_table('Followers');
-// db.drop_table('Events');
+// db.dropTable('Posts');
+// db.dropTable('Followers');
+// db.dropTable('Events');
 
-// db.get_followers(function(err, data){
+// db.getFollowers(function(err, data){
 //   console.log('Followers:', data);
 // });
 
-// db.get_posts(function(err, data){
+// db.getPosts(function(err, data){
 //   console.log('Posts:', data);
 // });
 
-// db.get_events(function(err, data){
+// db.getEvents(function(err, data){
 //   console.log('Events:', data);
 // });
 

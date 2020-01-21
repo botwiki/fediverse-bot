@@ -3,13 +3,13 @@ var fs = require('fs'),
     url = require('url'),
     util = require('util'),
     moment = require('moment'),
-    db = require(__dirname + '/../helpers/db.js'),
+    dbHelper = require(__dirname + '/../helpers/db.js'),
     keys = require(__dirname + '/../helpers/keys.js'),
     request = require('request'),
     public_key_path = '.data/rsa/pubKey',
     private_key_path = '.data/rsa/privKey',
     bot_url = `https://${process.env.PROJECT_DOMAIN}.glitch.me`,
-    bot_compose_reply = require(__dirname + '/responses.js');
+    botComposeReply = require(__dirname + '/responses.js');
 
 if (!fs.existsSync(public_key_path) || !fs.existsSync(private_key_path)) {
   keys.generate_keys(function(){
@@ -75,8 +75,8 @@ else{
           'publicKeyPem': public_key
       }
     },
-    compose_reply: bot_compose_reply,
-    send_reply: function(options, cb){
+    composeReply: botComposeReply,
+    sendReply: function(options, cb){
       var bot = this,
           reply_to_username = '';
 
@@ -88,16 +88,16 @@ else{
         console.log({reply_to_username});  
       } catch(err){ /*noop*/ }
       
-      bot.create_post({
+      bot.createPost({
         type: 'Note',
-        content: `<blockquote>${options.payload.object.content}<p><a href="${options.payload.object.url}">${options.payload.object.url}</a></p></blockquote><p>${options.reply_message}</p>`,
+        content: `<blockquote>${options.payload.object.content}<cite><a href="${options.payload.object.url}">${options.payload.object.url}</a></cite></blockquote><p>${options.reply_message}</p>`,
         reply_message: `<a href="${options.payload.actor}">${reply_to_username}</a> ${options.reply_message}`,
         in_reply_to: options.payload.object.url
       }, function(err, message){
         // console.log(err, message);
       });
     },
-    create_post: function(options, cb){
+    createPost: function(options, cb){
       var bot = this;
 
       if ((!options.content || options.content.trim().length === 0 ) && !options.attachment ){
@@ -112,8 +112,8 @@ else{
           reply_message = options.reply_message || null,
           post_content = options.content || options.url || '',
           post_attachment = JSON.stringify(options.attachment) || '[]';
-
-      db.save_post({
+      
+      dbHelper.savePost({
         type: post_type,
         content: post_content,
         attachment: post_attachment
@@ -160,13 +160,13 @@ else{
 
         console.log({post_in_reply_to});
 
-        db.get_followers(function(err, followers){
+        dbHelper.getFollowers(function(err, followers){
           if (followers){
             console.log(`sending update to ${followers.length} follower(s)...`);
 
             followers.forEach(function(follower){
               if (follower.url){
-                bot.sign_and_send({
+                bot.signAndSend({
                   follower: follower,
                   message: post
                 }, function(err, data){
@@ -182,11 +182,11 @@ else{
         }
       });
     },
-    delete_post: function(post_id, follower_url, cb){
+    deletePost: function(post_id, follower_url, cb){
         var bot = this;
             // guid = crypto.randomBytes(16).toString('hex');
 
-        bot.sign_and_send({
+        bot.signAndSend({
           follower: {
             url: follower_url
           },
@@ -208,11 +208,11 @@ else{
       var bot = this,
           guid = crypto.randomBytes(16).toString('hex');
 
-      db.get_event(payload.id, function(err, data){
+      dbHelper.getEvent(payload.id, function(err, data){
         // console.log('get_event', err, data);
 
 
-        bot.sign_and_send({
+        bot.signAndSend({
           follower: {
             url: payload.actor
           },
@@ -228,15 +228,15 @@ else{
                 cb(err, payload, data);
             }
           console.log('saving event', payload.id)
-          db.save_event(payload.id);
+          dbHelper.saveEvent(payload.id);
         });
 
       });
-//       db.get_event(payload.id, function(err, data){
+//       dbHelper.getEvent(payload.id, function(err, data){
 //         console.log('get_event', err, data);
         
 //         if (!err && !data){
-//           bot.sign_and_send({
+//           bot.signAndSend({
 //             follower: {
 //               url: payload.actor
 //             },
@@ -252,14 +252,14 @@ else{
 //                   cb(err, payload, data);
 //               }
 //             console.log('saving event', payload.id)
-//             db.save_event(payload.id);
+//             dbHelper.saveEvent(payload.id);
 //           });
 //         } else if (!err){
 //           console.log('duplicate event');
 //         }
 //       });
     },
-    sign_and_send: function(options, cb){
+    signAndSend: function(options, cb){
       var bot = this;
       // console.log('message to sign:');
       // console.log(util.inspect(options.message, false, null, true));

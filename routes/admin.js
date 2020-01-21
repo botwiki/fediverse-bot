@@ -5,8 +5,6 @@ var express = require('express'),
     db = require(__dirname + '/../helpers/db.js'),
     bot = require(__dirname + '/../bot/bot.js');
 
-
-
 router.get('/', function (req, res) {
   res.render('../views/admin.handlebars', {
     project_name: process.env.PROJECT_DOMAIN,
@@ -14,6 +12,15 @@ router.get('/', function (req, res) {
     bot_username: process.env.BOT_USERNAME,
     bot_description: process.env.BOT_DESCRIPTION
   });    
+});
+
+router.get('/logout', function (req, res) {
+    req.session.is_admin = false;
+    req.session.save();
+  
+    console.log('admin logged out');      
+    console.log(req.body);
+    res.redirect('/');
 });
 
 router.post('/', function (req, res) {

@@ -5,7 +5,7 @@ var express = require('express'),
 
 router.get('/:id',  function(req, res) {
   var post_id = req.params.id;
-  db.get_post(post_id, function(err, post_data){
+  db.getPost(post_id, function(err, post_data){
     if (post_data){
       post_data.date_formatted = moment(post_data.date).fromNow();;
 
