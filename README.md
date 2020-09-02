@@ -8,8 +8,6 @@
 
 With this Glitch starter project, you can create a bot that anyone [in the fediverse](https://en.wikipedia.org/wiki/Fediverse) can follow. This project is [in early development](https://github.com/botwiki/glitch-fediverse-bot/issues) with more features coming.
 
-To automate your bot, set up a free service like [cron-job.org](https://cron-job.org/en/), [Uptime Robot](https://uptimerobot.com/), or [a similar one](https://www.google.com/search?q=free+web+cron) to wake up your bot [every 25+ minutes](https://support.glitch.com/t/a-simple-twitter-bot-template/747/16). Use `https://YOUR_PROJECT_NAME.glitch.me/BOT_ENDPOINT` as a URL to which to send the HTTP request. (`BOT_ENDPOINT` is set in your `.env` file.)
-
 
 ## Bot administration
 
@@ -17,7 +15,7 @@ You can log into the admin panel by going to `YOUR_PROJECT_NAME.glitch.me/admin`
 
 ## Bot logic (the back end)
 
-Your bot's logic is inside the `routes/bot-endpoint.js` file. This is the code that runs when you access your bot's endpoint, as defined inside the `.env` file. See the `examples` folder for some examples of what your bot can do.
+*TBD*
 
 ## The look of your bot's page (the front end)
 

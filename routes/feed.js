@@ -1,9 +1,8 @@
-var express = require( 'express' ),
-    router = express.Router(),
-    RSS = require( 'rss' ),
-    moment = require( 'moment' ),
-    dbHelper = require( __dirname + '/../helpers/db.js' );
-
+const express = require( 'express' ),
+      router = express.Router(),
+      RSS = require( 'rss' ),
+      moment = require( 'moment' ),
+      dbHelper = require( __dirname + '/../helpers/db.js' );
 
 router.get( '/',  function( req, res ) {
   let xml = '';

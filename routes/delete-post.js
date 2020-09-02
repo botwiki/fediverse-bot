@@ -1,15 +1,15 @@
-var express = require( 'express' ),
-    router = express.Router(),
-    moment = require( 'moment' ),
-    bot = require( __dirname + '/../bot/bot.js' ),
-    db = require( __dirname + '/../helpers/db.js' );
+const express = require( 'express' ),
+      router = express.Router(),
+      moment = require( 'moment' ),
+      bot = require( __dirname + '/../bot/bot.js' ),
+      db = require( __dirname + '/../helpers/db.js' );
 
 router.get( '/:id',  function( req, res ) {
-  var is_admin = req.session.is_admin,
-      post_id = req.params.id;
+  let isAdmin = req.session.is_admin,
+      postID = req.params.id;
   
-  if ( is_admin ){
-    if ( post_id === 'all' ){
+  if ( isAdmin ){
+    if ( postID === 'all' ){
       console.log( {
         'delete post': 'all of them'
       } );
@@ -38,14 +38,14 @@ router.get( '/:id',  function( req, res ) {
       
     } else {
       console.log( {
-        'delete post': post_id
+        'delete post': postID
       } );
 
-      db.deletePost( post_id, bot, function( err ){
+      db.deletePost( postID, bot, function( err ){
         if ( err ){
-          console.log( `error deleting post ${post_id}`, err );
+          console.log( `error deleting post ${postID}`, err );
         } else {
-          console.log( `deleted post ${post_id}` );
+          console.log( `deleted post ${postID}` );
         }
       } );
       res.redirect( '/' );      
