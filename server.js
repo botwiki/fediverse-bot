@@ -1,3 +1,7 @@
+if ( !process.env.PROJECT_NAME || !process.env.PROJECT_ID ){
+  require( 'dotenv' ).config();
+}
+
 const app = require(__dirname + "/app.js"),
   db = require(__dirname + "/helpers/db.js"),
   bot = require(__dirname + "/bot/bot.js"),
