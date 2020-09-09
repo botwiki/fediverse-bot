@@ -99,13 +99,4 @@ router.get( '/id.pub', function ( req, res ) {
 
 } );
 
-router.get( '/robots.txt', function ( req, res ) {
-  fs.readFile( 'robots.txt', 'utf8' ,function( err, contents ){
-    res.writeHead( 200, { 'Content-Type': 'text/plain' } );
-    res.write( contents );
-    res.end();
-  });
-
-} );
-
 module.exports = router;

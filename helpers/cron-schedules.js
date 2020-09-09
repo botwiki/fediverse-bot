@@ -1,3 +1,5 @@
+/* Common cron schedules. Visit the cron package documentation at https://www.npmjs.com/package/cron to see how to create your own. */
+
 module.exports = {
   EVERY_FIVE_SECONDS: '*/5 * * * * *',
   EVERY_TEN_SECONDS: '*/10 * * * * *',  

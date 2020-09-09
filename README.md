@@ -1,17 +1,15 @@
-***Note: This project is under active development and not available for remixing on Glitch. Instead, please [import it from this GitHub repo](https://glitch.com/#!/import/github/botwiki/glitch-fediverse-bot).***
+![Fediverse bot feed](https://cdn.glitch.com/a4825d5c-d1d6-4780-8464-8636780177ef%2Ffeed-comb.png)
 
+# Fediverse bot
 
-![Glitch Fediverse bot feed](https://cdn.glitch.com/a4825d5c-d1d6-4780-8464-8636780177ef%2Ffeed-comb.png)
+Make creative online bots that anyone [in the fediverse](https://en.wikipedia.org/wiki/Fediverse) can follow! This project is [under active development](https://github.com/botwiki/fediverse-bot/issues) and contributions and feature suggestions are welcome.
 
-
-# Glitch Fediverse bot
-
-With this Glitch starter project, you can create a bot that anyone [in the fediverse](https://en.wikipedia.org/wiki/Fediverse) can follow. This project is [in early development](https://github.com/botwiki/glitch-fediverse-bot/issues) with more features coming.
+- [import to Glitch](https://glitch.com/#!/import/github/botwiki/fediverse-bot)
 
 
 ## Bot administration
 
-You can log into the admin panel by going to `YOUR_PROJECT_NAME.glitch.me/admin` and logging in using the password set inside your `.env` file. This will allow you to delete your bot's posts one by one. (Multi-post deletion is coming!)
+You can log into the admin panel by going to `/admin` and logging in using the password set inside your `.env` file. This will allow you to delete your bot's posts one by one. (Multi-post deletion is coming!)
 
 ## Bot logic (the back end)
 
@@ -25,7 +23,7 @@ You can use [ES6](http://es6-features.org/#Constants), you script files will be 
 
 ## TO-DO:
 
-[See issues on GitHub.](https://github.com/fourtonfish/glitch-fediverse-bot/issues)
+[See issues on GitHub.](https://github.com/fourtonfish/fediverse-bot/issues)
 
 ## Resources:
 
@@ -36,11 +34,5 @@ You can use [ES6](http://es6-features.org/#Constants), you script files will be 
 
 ## Debugging/testing
 
-- [webfinger output](https://glitch-fediverse-bot.glitch.me/.well-known/webfinger?resource=acct:bot@glitch-fediverse-bot.glitch.me)
-- [the Actor object](https://glitch-fediverse-bot.glitch.me/bot?debug=true)
-
-
-Powered by [Glitch](https://glitch.com/)
--------------------
-
-\ ゜o゜)ノ
+- [webfinger output](https://fediverse-bot.glitch.me/.well-known/webfinger?resource=acct:bot@fediverse-bot.glitch.me)
+- [the Actor object](https://fediverse-bot.glitch.me/bot?debug=true)

@@ -1,7 +1,6 @@
 const fs = require( 'fs' ),
       url = require( 'url' ),
       util = require( 'util' ),
-      bot = require( __dirname + '/../bot/bot.js' ),
       express = require( 'express' ),
       router = express.Router();
 
