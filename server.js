@@ -1,25 +1,40 @@
-var app = require(__dirname + '/app.js'),
-    load_keys = require(__dirname + '/helpers/keys.js'),
-    db = require(__dirname + '/helpers/db.js');
+const app = require(__dirname + "/app.js"),
+  db = require(__dirname + "/helpers/db.js"),
+  bot = require(__dirname + "/bot/bot.js"),
+  CronJob = require("cron").CronJob,
+  cronSchedules = require(__dirname + "/helpers/cron-schedules.js");
 
 db.init();
 
-// db.dropTable('Posts');
-// db.dropTable('Followers');
-// db.dropTable('Events');
+/*********************************************/
+/* FOR DEBUGGING */
 
-// db.getFollowers(function(err, data){
-//   console.log('Followers:', data);
-// });
+// db.dropTable( 'Posts' );
+// db.dropTable( 'Followers' );
+// db.dropTable( 'Events' );
 
-// db.getPosts(function(err, data){
-//   console.log('Posts:', data);
-// });
+// db.getFollowers( function( err, data ){
+//   console.log( 'Followers:', data );
+// } );
 
-// db.getEvents(function(err, data){
-//   console.log('Events:', data);
-// });
+// db.getPosts( function( err, data ){
+//   console.log( 'Posts:', data );
+// } );
 
-var listener = app.listen(process.env.PORT, function() {
+// db.getEvents( function( err, data ){
+//   console.log( 'Events:', data );
+// } );
+
+// bot.script();
+
+/* DEBUGGING END */
+/*********************************************/
+
+/* Schedule your bot. See helpers/cron-schedules.js for common schedules, or the cron package documentation at https://www.npmjs.com/package/cron to create your own.*/
+
+// ( new CronJob( cronSchedules.EVERY_SIX_HOURS, function() { bot.script() } ) ).start();
+// ( new CronJob( cronSchedules.EVERY_THIRTY_SECONDS, function() { bot.script() } ) ).start();
+
+const listener = app.listen(process.env.PORT, function() {
   console.log(`app is running on port ${listener.address().port}...`);
 });

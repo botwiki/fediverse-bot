@@ -12,7 +12,7 @@ var fs = require('fs'),
     botComposeReply = require(__dirname + '/responses.js');
 
 if (!fs.existsSync(public_key_path) || !fs.existsSync(private_key_path)) {
-  keys.generate_keys(function(){
+  keys.generateKeys(function(){
     process.kill(process.pid);
   });
 }
@@ -75,6 +75,7 @@ else{
           'publicKeyPem': public_key
       }
     },
+    script: require( __dirname + '/script.js' ),
     composeReply: botComposeReply,
     sendReply: function(options, cb){
       var bot = this,

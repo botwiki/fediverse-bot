@@ -3,7 +3,7 @@
     <div class="card mt-3">
       {{#equals post.type "Note"}}
         <div class="card-body">
-          <h5 class="card-title" title="{{post.date_formatted}}">{{post.date}}</h5>
+          <h5 class="card-title post-date-formatted" title="{{post.date_formatted}}">{{post.date}}</h5>
           {{#if post.content}}
             <p class="card-text">{{{post.content}}}</p>
           {{/if}}        
