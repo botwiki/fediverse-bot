@@ -4,7 +4,7 @@
 
 Make creative online bots that anyone [in the fediverse](https://en.wikipedia.org/wiki/Fediverse) can follow! This project is [under active development](https://github.com/botwiki/fediverse-bot/issues) and contributions and feature suggestions are welcome.
 
-- [import to Glitch](https://glitch.com/#!/import/github/botwiki/fediverse-bot)
+- [Import to Glitch](https://glitch.com/#!/import/github/botwiki/fediverse-bot)
 
 
 ## Bot administration
