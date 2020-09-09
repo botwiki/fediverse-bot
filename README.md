@@ -4,7 +4,7 @@
 
 Make creative online bots that anyone [in the fediverse](https://en.wikipedia.org/wiki/Fediverse) can follow! This project is [under active development](https://github.com/botwiki/fediverse-bot/issues) and contributions and feature suggestions are welcome.
 
-- [Import to Glitch](https://glitch.com/#!/import/github/botwiki/fediverse-bot)
+- [Import to Glitch](https://glitch.com/#!/import/github/botwiki/fediverse-bot) ([Learn more](https://glitch.com/about))
 
 
 ## Bot administration
@@ -13,7 +13,14 @@ You can log into the admin panel by going to `/admin` and logging in using the p
 
 ## Bot logic (the back end)
 
-*TBD*
+1. Update your bot's main script in `bot/script.js`.
+2. Set up your bot's schedule in `server.js`.
+
+```
+( new CronJob( cronSchedules.EVERY_SIX_HOURS, function() { bot.script() } ) ).start();
+```
+
+See `helpers/cron-schedules.js` for common schedules, or the cron package documentation at https://www.npmjs.com/package/cron to create your own.
 
 ## The look of your bot's page (the front end)
 
