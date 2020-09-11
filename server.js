@@ -29,7 +29,7 @@ db.init();
 //   console.log( 'Events:', data );
 // } );
 
-// bot.script();
+bot.script();
 
 /* DEBUGGING END */
 /*********************************************/
