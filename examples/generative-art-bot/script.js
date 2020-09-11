@@ -22,8 +22,7 @@ module.exports = function(){
     height: 360,
     colors: scheme.colors()
   }, function( err, imgData ){
-    const imgUrl = `${ bot.bot_url }/${ imgData.path }`;
-    console.log( 'posting new image...', imgUrl );
+    console.log( 'posting new image...', { imgUrl: `${ bot.bot_url }/${ imgData.path }` } );
 
     var imgName = imgData.path.replace( 'img/', '' );
         
@@ -32,8 +31,8 @@ module.exports = function(){
       content: content,
       attachment: [
         {
-          url: imgUrl,
-          content: content // Image description here.
+          url: bot.bot_url,
+          content: 'Abstract art' // Image description here.
         }
       ]
     }, function( err, message ){

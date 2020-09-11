@@ -1,3 +1,7 @@
+if ( !process.env.PROJECT_NAME || !process.env.PROJECT_ID ){
+  require( 'dotenv' ).config();
+}
+
 const path = require( 'path' ),
       express = require( 'express' ),
       session = require( 'express-session' ),

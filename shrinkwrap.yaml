@@ -5,6 +5,7 @@ dependencies:
   color-scheme: 1.0.1
   connect-sqlite3: 0.9.11
   cron: 1.8.2
+  dotenv: 8.2.0
   express: 4.16.3
   express-babelify-middleware: 0.2.1
   express-handlebars: 3.0.0
@@ -1682,6 +1683,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-raigMkn7CJNNo6Ihro1fzG7wr3fHuYVytzquZKX5n0yizGsTcYgzdIUwj1X9pK0VvjeihV+XiclP+DjwbsSKug==
+  /dotenv/8.2.0:
+    dev: false
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
   /duplexer2/0.1.4:
     dependencies:
       readable-stream: 2.3.6
@@ -5379,6 +5386,7 @@ specifiers:
   color-scheme: ^1.0.1
   connect-sqlite3: ^0.9.11
   cron: ^1.8.2
+  dotenv: ^8.2.0
   express: ^4.16.3
   express-babelify-middleware: ^0.2.1
   express-handlebars: ^3.0.0
