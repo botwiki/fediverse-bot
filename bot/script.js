@@ -1,8 +1,9 @@
 const express = require( 'express' ),
       helpers = require( __dirname + '/../helpers/general.js' ),
       ColorScheme = require('color-scheme'),
+      colorbrewerColors = require( __dirname + '/../helpers/colorbrewer.js' ),
       generators = {
-        triangular_mesh: require(__dirname + '/../generators/triangular-mesh.js')
+        joy_division: require(__dirname + '/../generators/joy-division.js')
       },    
       grammar = require( __dirname + '/../tracery/tracery.js' ).grammar;
 
@@ -17,22 +18,21 @@ module.exports = function(){
         .scheme( 'mono' )
         .variation( 'soft' );
 
-  generators.triangular_mesh( {
-    width: 800,
-    height: 360,
-    colors: scheme.colors()
-  }, function( err, imgData ){
-    const imgUrl = `${ bot.bot_url }/${ imgData.path }`;
-    console.log( 'posting new image...', imgUrl );
-
-    var imgName = imgData.path.replace( 'img/', '' );
+  generators.joy_division( {
+    width: 640,
+    height: 480,
+    colors: helpers.randomFromArray( colorbrewerColors ),
+    animate: true,
+    save: true
+  }, function( err, imgURL ){
+    console.log( 'posting new image...', imgURL );
         
     bot.createPost( {
       type: 'Note',    
-      content: content,
+      // content: content,
       attachment: [
         {
-          url: imgUrl,
+          url: imgURL,
           content: content // Image description here.
         }
       ]

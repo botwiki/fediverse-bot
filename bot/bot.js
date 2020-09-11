@@ -213,8 +213,8 @@ else{
       let bot = this,
           guid = crypto.randomBytes(16).toString( 'hex' );
 
-      dbHelper.getEvent(payload.id, function( err, data ){
-        // console.log( 'getEvent', err, data );
+      dbHelper.getEvent(payload.id, function( err, eventData ){
+        console.log( 'getEvent', err, eventData );
 
 
         bot.signAndSend( {
@@ -229,11 +229,17 @@ else{
             'object': payload,
           }
         }, function( err, data ){
-            if ( cb ){
-                cb( err, payload, data );
-            }
-          console.log( 'saving event', payload.id)
-          dbHelper.saveEvent(payload.id );
+          if ( eventData ){
+            err = 'duplicate event';
+            console.log( 'error: duplicate event' );
+          } else {
+            console.log( 'saving event', payload.id );
+            dbHelper.saveEvent( payload.id );
+          }
+
+          if ( cb ){
+            cb( err, payload, data );
+          }
         } );
 
       } );
