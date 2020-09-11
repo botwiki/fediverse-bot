@@ -11,10 +11,12 @@
         </a>
       {{/if}}
       {{#equals this.type "Note"}}
-        <div class="card-body">
-          <!-- <h5 class="card-title" title="{{this.date_formatted}}">{{this.date}}</h5> -->
-          <p class="card-text">{{{this.content}}}</p>
-        </div>
+        {{#if this.content}}
+          <div class="card-body">
+            <!-- <h5 class="card-title" title="{{this.date_formatted}}">{{this.date}}</h5> -->
+            <p class="card-text">{{{this.content}}}</p>
+          </div>
+        {{/if}}
       {{/equals}}
       <div class="card-footer">
         <a href="/post/{{this.id}}" title="{{this.date}}" class="post-date">{{this.date_formatted}}</a>
@@ -25,7 +27,6 @@
     </div>
   {{/each}}
   {{#if has_posts}}
-
     {{#if is_admin}}
     <div class="row mt-5">
       <div class="col-sm-12 col-md-8">

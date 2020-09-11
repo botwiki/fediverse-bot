@@ -2,6 +2,13 @@ if ( !process.env.PROJECT_NAME || !process.env.PROJECT_ID ){
   require( 'dotenv' ).config();
 }
 
+const fs = require('fs'),
+      imgPath = './.data/img';
+
+if ( !fs.existsSync( imgPath ) ){
+  fs.mkdirSync( imgPath );
+}
+
 const app = require(__dirname + "/app.js"),
   db = require(__dirname + "/helpers/db.js"),
   bot = require(__dirname + "/bot/bot.js"),
@@ -17,9 +24,9 @@ db.init();
 // db.dropTable( 'Followers' );
 // db.dropTable( 'Events' );
 
-// db.getFollowers( function( err, data ){
-//   console.log( 'Followers:', data );
-// } );
+db.getFollowers( function( err, data ){
+  console.log( 'Followers:', data );
+} );
 
 // db.getPosts( function( err, data ){
 //   console.log( 'Posts:', data );
@@ -29,7 +36,7 @@ db.init();
 //   console.log( 'Events:', data );
 // } );
 
-bot.script();
+// bot.script();
 
 /* DEBUGGING END */
 /*********************************************/

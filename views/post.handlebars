@@ -9,8 +9,10 @@
           {{/if}}        
 
           {{#each post.attachment}}
-            <p><a href="{{this.url}}"><img src="{{this.url}}"></a></p>
-            <p>{{this.content}}</p>
+            <p><a href="{{this.url}}"><img alt="{{this.content}}" title="{{this.content}}" src="{{this.url}}"></a></p>
+            {{#if this.content}}
+              <!-- <p>{{this.content}}</p> -->
+            {{/if}}
           {{/each}}        
         </div>
       {{/equals}}     
