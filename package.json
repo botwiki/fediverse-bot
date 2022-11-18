@@ -10,7 +10,7 @@
     "cron": "^1.8.2",
     "express": "^4.16.3",
     "sqlite3": "^4.0.0",
-    "express-handlebars": "^3.0.0",
+    "express-handlebars": "^5.3.1",
     "body-parser": "^1.18.3",
     "tracery-grammar": "^2.7.3",
     "activitystrea.ms": "^2.1.3",
