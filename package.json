@@ -20,7 +20,7 @@
     "pubsubhubbub": "^0.4.1",
     "node-openssl-cert": "^0.0.47",
     "generate-rsa-keypair": "^0.1.2",
-    "node-sass-middleware": "^0.11.0",
+    "node-sass-middleware": "^1.0.1",
     "express-babelify-middleware": "^0.2.1",
     "express-session": "^1.15.6",
     "connect-sqlite3": "^0.9.11",
