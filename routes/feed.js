@@ -20,7 +20,7 @@ router.get( '/',  function( req, res ) {
     <logo>${process.env.BOT_AVATAR_URL}</logo>
     <author>
       <id>https://${process.env.PROJECT_DOMAIN}.glitch.me</id>
-      <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+      <activity:object-type>http://activitystrea.ms/schema/1.0/service</activity:object-type>
       <uri>https://${process.env.PROJECT_DOMAIN}.glitch.me</uri>
       <name>${process.env.BOT_USERNAME}</name>
       <email>bot@${process.env.PROJECT_DOMAIN}.glitch.me</email>
@@ -50,7 +50,7 @@ router.get( '/',  function( req, res ) {
   <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
   <link rel="alternate" type="application/activity+json" href="https://${process.env.PROJECT_DOMAIN}.glitch.me/post/${post.id}"/>
   <content type="html" xml:lang="en">&lt;p&gt;&lt;span class="h-card"&gt;&lt;a href="https://mastodon.social/@metalbob" class="u-url mention"&gt;@&lt;span&gt;metalbob&lt;/span&gt;&lt;/a&gt;&lt;/span&gt; i suppose it&amp;apos;s possible although hopefully it never becomes actual law&lt;/p&gt;</content>
-  <link rel="mentioned" ostatus:object-type="http://activitystrea.ms/schema/1.0/person" href="https://mastodon.social/users/metalbob"/>
+  <link rel="mentioned" ostatus:object-type="http://activitystrea.ms/schema/1.0/service" href="https://mastodon.social/users/metalbob"/>
   <link rel="mentioned" ostatus:object-type="http://activitystrea.ms/schema/1.0/collection" href="http://activityschema.org/collection/public"/>
   <mastodon:scope>public</mastodon:scope>
   <link rel="self" type="application/atom+xml" href="https://${process.env.PROJECT_DOMAIN}.glitch.me/post/${post.id}?format=xml"/>

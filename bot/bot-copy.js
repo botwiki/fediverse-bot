@@ -69,7 +69,7 @@ else{
           'url': process.env.BOT_AVATAR_URL,
           'type': 'Image'
         }],
-      'type': 'Person',
+      'type': 'Service',
       'name': process.env.BOT_USERNAME,
       'preferredUsername': process.env.BOT_USERNAME,
       'inbox': `${bot_url}/inbox`,
