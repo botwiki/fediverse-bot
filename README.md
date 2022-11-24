@@ -6,7 +6,6 @@ Make creative online bots that anyone [in the fediverse](https://en.wikipedia.or
 
 - [Import to Glitch](https://glitch.com/#!/import/github/botwiki/fediverse-bot) ([Learn more](https://glitch.com/about))
 
-
 ## Bot administration
 
 You can log into the admin panel by going to `/admin` and logging in using the password set inside your `.env` file. This will allow you to delete your bot's posts one by one. (Multi-post deletion is coming!)
@@ -17,7 +16,7 @@ You can log into the admin panel by going to `/admin` and logging in using the p
 2. Set up your bot's schedule in `server.js`.
 
 ```
-( new CronJob( cronSchedules.EVERY_SIX_HOURS, function() { bot.script() } ) ).start();
+(new CronJob(cronSchedules.EVERY_SIX_HOURS, () => {bot.script()})).start();
 ```
 
 See `helpers/cron-schedules.js` for common schedules, or the cron package documentation at https://www.npmjs.com/package/cron to create your own.

@@ -1,6 +1,6 @@
-var tracery = require('tracery-grammar'),
-    raw_grammar = require(__dirname + '/grammar.json'),    
-    processed_grammar = tracery.createGrammar(raw_grammar);
+const tracery = require('tracery-grammar'),
+      raw_grammar = require(__dirname + '/grammar.json'),    
+      processed_grammar = tracery.createGrammar(raw_grammar);
 
 processed_grammar.addModifiers(tracery.baseEngModifiers); 
 
