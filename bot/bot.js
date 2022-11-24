@@ -1,28 +1,28 @@
-if ( !process.env.PROJECT_NAME || !process.env.PROJECT_ID ){
-  require( 'dotenv' ).config();
+if (!process.env.PROJECT_NAME || !process.env.PROJECT_ID){
+  require('dotenv').config();
 }
 
-const fs = require( 'fs' ),
-      crypto = require( 'crypto' ),
-      url = require( 'url' ),
-      util = require( 'util' ),
-      moment = require( 'moment' ),
-      dbHelper = require( __dirname + '/../helpers/db.js' ),
-      keys = require( __dirname + '/../helpers/keys.js' ),
-      request = require( 'request' ),
+const fs = require('fs'),
+      crypto = require('crypto'),
+      url = require('url'),
+      util = require('util'),
+      moment = require('moment'),
+      dbHelper = require(__dirname + '/../helpers/db.js'),
+      keys = require(__dirname + '/../helpers/keys.js'),
+      request = require('request'),
       publicKeyPath = '.data/rsa/pubKey',
       privateKeyPath = '.data/rsa/privKey',
       botUrl = `https://${ process.env.PROJECT_DOMAIN}.glitch.me`,
-      botComposeReply = require( __dirname + '/responses.js' );
+      botComposeReply = require(__dirname + '/responses.js');
 
-if ( !fs.existsSync( publicKeyPath ) || !fs.existsSync( privateKeyPath ) ) {
-  keys.generateKeys( function(){
-    process.kill( process.pid );
-  } );
+if (!fs.existsSync(publicKeyPath) || !fs.existsSync(privateKeyPath)) {
+  keys.generateKeys(() => {
+    process.kill(process.pid);
+  });
 }
 else{
-  const publicKey = fs.readFileSync( publicKeyPath, 'utf8' ),
-        privateKey = fs.readFileSync( privateKeyPath, 'utf8' ); 
+  const publicKey = fs.readFileSync(publicKeyPath, 'utf8'),
+        privateKey = fs.readFileSync(privateKeyPath, 'utf8'); 
 
   module.exports = {
     bot_url: botUrl,
@@ -52,7 +52,7 @@ else{
         // },
         // {
         //   rel: 'magic-public-key',
-        //   href: `data:application/magic-public-key,RSA.${ publicKey.replace( '-----BEGIN PUBLIC KEY-----\n', '').replace( '\n-----END PUBLIC KEY-----', '').replace( '\\n', '') }`
+        //   href: `data:application/magic-public-key,RSA.${ publicKey.replace('-----BEGIN PUBLIC KEY-----\n', '').replace('\n-----END PUBLIC KEY-----', '').replace('\\n', '') }`
         // }      
       ],      
     info: {
@@ -70,7 +70,7 @@ else{
           'type': 'Image'
         }],
       'type': 'Service',
-      'name': process.env.BOT_USERNAME,
+      'name': process.env.BOT_NAME,
       'preferredUsername': process.env.BOT_USERNAME,
       'inbox': `${ botUrl }/inbox`,
       'publicKey': {
@@ -79,34 +79,34 @@ else{
           'publicKeyPem': publicKey
       }
     },
-    script: require( __dirname + '/script.js' ),
+    script: require(__dirname + '/script.js'),
     composeReply: botComposeReply,
-    sendReply: function( options, cb ){
+    sendReply: (options, cb) => {
       let bot = this,
           replyToUsername = '';
 
       try{
-        let actorUrlParts = options.payload.actor.split( '/' );
+        let actorUrlParts = options.payload.actor.split('/');
         let username = actorUrlParts[actorUrlParts.length-1];
         replyToUsername = `@${ username}@${ url.parse(options.payload.actor).hostname} `;
 
-        console.log( { replyToUsername } );  
-      } catch( err ){ /* noop */ }
+        console.log({ replyToUsername });  
+      } catch(err){ /* noop */ }
       
-      bot.createPost( {
+      bot.createPost({
         type: 'Note',
         content: `<blockquote>${ options.payload.object.content }<cite><a href="${ options.payload.object.url}">${ options.payload.object.url }</a></cite></blockquote><p>${ options.reply_message }</p>`,
         reply_message: `<a href="${ options.payload.actor}">${ replyToUsername }</a> ${ options.reply_message }`,
         in_reply_to: options.payload.object.url
-      }, function( err, message ){
-        // console.log( err, message );
-      } );
+      }, (err, message) => {
+        // console.log(err, message);
+      });
     },
-    createPost: function( options, cb ){
+    createPost: (options, cb) => {
       let bot = this;
 
-      if ( ( !options.content || options.content.trim().length === 0 ) && !options.attachment ){
-        console.log( 'error: no post content or attachments' );
+      if ((!options.content || options.content.trim().length === 0) && !options.attachment){
+        console.log('error: no post content or attachments');
         return false;
       }
 
@@ -116,18 +116,18 @@ else{
           postInReplyTo = options.in_reply_to || null,
           replyMessage = options.reply_message || null,
           postContent = options.content || options.url || '',
-          postAttachment = JSON.stringify( options.attachment ) || '[]';
+          postAttachment = JSON.stringify(options.attachment) || '[]';
       
-      dbHelper.savePost( {
+      dbHelper.savePost({
         type: postType,
         content: postContent,
         attachment: postAttachment
-      }, function( err, data ){
+      }, (err, data) => {
         let postID = data.lastID;
         
         let postObject;
         
-        if ( postType === 'Note' ){
+        if (postType === 'Note'){
           postObject = {
             'id': `${ botUrl }/post/${ postID }`,
             'type': postType,
@@ -137,21 +137,21 @@ else{
             'to': 'https://www.w3.org/ns/activitystreams#Public'
           };
           
-          if ( options.attachment ){
+          if (options.attachment){
             let attachments = [];
 
-            options.attachment.forEach( function( attachment ){
-              attachments.push( {
+            options.attachment.forEach((attachment) => {
+              attachments.push({
                 'type': 'Image',
                 'content': attachment.content,
                 'url': attachment.url
-              } );
-            } );
+              });
+            });
             postObject.attachment = attachments;
           }
         }
         
-       if ( postInReplyTo ){
+       if (postInReplyTo){
           postObject.inReplyTo = postInReplyTo;  
        }        
         
@@ -163,35 +163,35 @@ else{
           'object': postObject
         }
 
-        console.log( {postInReplyTo} );
+        console.log({postInReplyTo});
 
-        dbHelper.getFollowers( function( err, followers ){
-          if ( followers ){
-            console.log( `sending update to ${ followers.length} follower(s)...` );
+        dbHelper.getFollowers((err, followers) => {
+          if (followers){
+            console.log(`sending update to ${ followers.length} follower(s)...`);
 
-            followers.forEach( function( follower ){
-              if ( follower.url ){
-                bot.signAndSend( {
+            followers.forEach((follower) => {
+              if (follower.url){
+                bot.signAndSend({
                   follower: follower,
                   message: post
-                }, function( err, data ){
+                }, (err, data) => {
 
-                } );
+                });
               }
-            } );
+            });
           }
-        } );
+        });
 
-        if ( cb ){
-          cb( null, post );
+        if (cb){
+          cb(null, post);
         }
-      } );
+      });
     },
-    deletePost: function( postID, followerUrl, cb ){
+    deletePost: (postID, followerUrl, cb) => {
         let bot = this;
-            // guid = crypto.randomBytes(16).toString( 'hex' );
+            // guid = crypto.randomBytes(16).toString('hex');
 
-        bot.signAndSend( {
+        bot.signAndSend({
           follower: {
             url: followerUrl
           },
@@ -203,21 +203,22 @@ else{
             'actor': `${ bot.bot_url }/bot`,
             'object': `${ bot.bot_url }/post/${ postID }`
           }
-        }, function( err, data ){
-            if ( cb ){
-                cb( err, data );
+        }, (err, data) => {
+            if (cb){
+                cb(err, data);
             }
-        } );
+        });
     },    
-    accept: function( payload, cb ){
+    accept: (payload, cb) => {
       let bot = this,
-          guid = crypto.randomBytes(16).toString( 'hex' );
+          guid = crypto.randomBytes(16).toString('hex');
 
-      dbHelper.getEvent(payload.id, function( err, eventData ){
-        console.log( 'getEvent', err, eventData );
+      dbHelper.getEvent(payload.id, (err, eventData) => {
+        console.log('getEvent', err, eventData);
+        
+        console.log(bot);
 
-
-        bot.signAndSend( {
+        bot.signAndSend({
           follower: {
             url: payload.actor
           },
@@ -228,26 +229,26 @@ else{
             'actor': `${ bot.bot_url }/bot`,
             'object': payload,
           }
-        }, function( err, data ){
-          if ( eventData ){
+        }, (err, data) => {
+          if (eventData){
             err = 'duplicate event';
-            console.log( 'error: duplicate event' );
+            console.log('error: duplicate event');
           } else {
-            console.log( 'saving event', payload.id );
-            dbHelper.saveEvent( payload.id );
+            console.log('saving event', payload.id);
+            dbHelper.saveEvent(payload.id);
           }
 
-          if ( cb ){
-            cb( err, payload, data );
+          if (cb){
+            cb(err, payload, data);
           }
-        } );
+        });
 
-      } );
-//       dbHelper.getEvent(payload.id, function( err, data ){
-//         console.log( 'getEvent', err, data );
+      });
+//       dbHelper.getEvent(payload.id, (err, data) => {
+//         console.log('getEvent', err, data);
         
-//         if ( !err && !data ){
-//           bot.signAndSend( {
+//         if (!err && !data){
+//           bot.signAndSend({
 //             follower: {
 //               url: payload.actor
 //             },
@@ -258,37 +259,37 @@ else{
 //               'actor': `${ bot.bot_url }/bot`,
 //               'object': payload,
 //             }
-//           }, function( err, data ){
-//               if ( cb ){
-//                   cb( err, payload, data );
+//           }, (err, data) => {
+//               if (cb){
+//                   cb(err, payload, data);
 //               }
-//             console.log( 'saving event', payload.id)
-//             dbHelper.saveEvent(payload.id );
-//           } );
-//         } else if ( !err ){
-//           console.log( 'duplicate event' );
+//             console.log('saving event', payload.id)
+//             dbHelper.saveEvent(payload.id);
+//           });
+//         } else if (!err){
+//           console.log('duplicate event');
 //         }
-//       } );
+//       });
     },
-    signAndSend: function( options, cb ){
+    signAndSend: (options, cb) => {
       let bot = this;
-      // console.log( 'message to sign:' );
-      // console.log( util.inspect(options.message, false, null, true) );
+      // console.log('message to sign:');
+      // console.log(util.inspect(options.message, false, null, true));
       
-      options.follower.url = options.follower.url.replace( 'http://localhost:3000', 'https://befc66af.ngrok.io' );
+      // options.follower.url = options.follower.url.replace('http://localhost:3000', 'https://befc66af.ngrok.io');
 
-      if ( options.follower.url && options.follower.url !== 'undefined' ){
-        options.follower.domain = url.parse( options.follower.url ).hostname;
+      if (options.follower.url && options.follower.url !== 'undefined'){
+        options.follower.domain = url.parse(options.follower.url).hostname;
 
-        let signer = crypto.createSign( 'sha256' ),
+        let signer = crypto.createSign('sha256'),
             d = new Date(),
             stringToSign = `(request-target): post /inbox\nhost: ${ options.follower.domain}\ndate: ${ d.toUTCString() }`;
 
-        signer.update( stringToSign );
+        signer.update(stringToSign);
         signer.end();
         
-        let signature = signer.sign(privateKey );
-        let signatureB64 = signature.toString( 'base64' );
+        let signature = signer.sign(privateKey);
+        let signatureB64 = signature.toString('base64');
         let header = `keyId="${ botUrl }/bot",headers="(request-target) host date",signature="${ signatureB64}"`;
       
         let reqObject = {
@@ -303,23 +304,23 @@ else{
           body: options.message
         };
         
-        // console.log( 'request object:' );
-        // console.log( util.inspect(reqObject, false, null, true) );        
+        // console.log('request object:');
+        // console.log(util.inspect(reqObject, false, null, true));        
 
-        request( reqObject, function (error, response ){
-          console.log( `sent message to ${ options.follower.url}...` );
-          if ( error) {
-            console.log( 'error:', error, response );
+        request(reqObject,  (error, response) => {
+          console.log(`sent message to ${ options.follower.url}...`);
+          if (error) {
+            console.log('error:', error, response);
           }
           else {
-            console.log( 'response:', response.statusCode, response.statusMessage );
-            // console.log( response );
+            console.log('response:', response.statusCode, response.statusMessage);
+            // console.log(response);
           }
           
-          if ( cb ){
-            cb( error, response );
+          if (cb){
+            cb(error, response);
           }
-        } );
+        });
       }
     }
   };
